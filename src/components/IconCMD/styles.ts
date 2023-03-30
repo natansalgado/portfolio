@@ -5,8 +5,9 @@ export const Container = styled.button`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  z-index: 99;
 
-  height: 80px;
+  height: 100px;
   width: 100px;
   border: none;
   background: none;

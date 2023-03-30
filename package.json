@@ -10,9 +10,11 @@
   },
   "dependencies": {
     "@reactflow/node-resizer": "^2.1.0",
+    "@reduxjs/toolkit": "^1.9.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.8.0",
+    "react-redux": "^8.0.5",
     "reactflow": "^11.7.0",
     "styled-components": "^5.3.9"
   },

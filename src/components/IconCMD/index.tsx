@@ -1,15 +1,20 @@
 import { Container } from "./styles"
 import { HiCommandLine } from 'react-icons/hi2'
 
-interface Props {
-  onClick?: () => void
-}
+import { handleOpen } from "../../store/aboutSlice"
+import { useDispatch } from "react-redux"
 
-export const IconCMD = ({ onClick }: Props) => {
+export const IconCMD = () => {
+  const dispatch = useDispatch()
+
+  const open = () => {
+    dispatch(handleOpen())
+  }
+
   return (
-    <Container className="draghandle" onClick={onClick}>
+    <Container onDoubleClick={open}>
       <HiCommandLine size={40} />
-      <h1>sobre.cmd</h1>
+      <h1>sobre mim.cmd</h1>
     </Container>
   )
 }

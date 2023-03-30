@@ -16,8 +16,8 @@ export const Container = styled.div<Props>`
   min-height: 200px;
   min-width: 270px;
 
-  width: ${({ resize }) => resize ? '100%' : '80vw'};
-  height: ${({ resize }) => resize ? '100%' : '80vh'};
+  height: ${({resize}) => resize ? '100%' : '80vh'};
+  width: ${({resize}) => resize ? '100%' : '80vw'};
 
   header {
     display: flex;

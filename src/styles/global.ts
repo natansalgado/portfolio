@@ -8,7 +8,7 @@ export default createGlobalStyle`
   }
 
   *::-webkit-scrollbar {
-    width: 12px;
+    width: 15px;
   }
 
   *::-webkit-scrollbar-track {
@@ -32,6 +32,6 @@ export default createGlobalStyle`
   }
 
   .App {
-    position: relative;
+    
   }
 `
