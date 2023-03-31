@@ -20,7 +20,6 @@ export const CMD = () => {
   const defaultText = 'aaaaaaaaa aaaaaaaaaaaaaa'
   const dispatch = useDispatch()
 
-  const [focus, setFocus] = useState(false)
   const [resize, setResize] = useState(false)
   const [text, setText] = useState('')
 
@@ -39,6 +38,8 @@ export const CMD = () => {
     dispatch(activeAbout())
   }
 
+  console.log('renderizado')
+
   useEffect(() => {
     setTimeout(() => write(defaultText), 1000)
   }, [])
@@ -55,7 +56,7 @@ export const CMD = () => {
       bounds={{ left: 0, top: 0, right: windowWidth - ((80 / 100) * windowWidth), bottom: (windowHeight - ((80 / 100) * windowHeight)) - 50 }}
       onStart={handleActived}
     >
-      <Container onFocus={handleActived} resize={resize} className={actived === 'about' ? 'actived' : ''}>
+      <Container onFocus={handleActived} onClick={handleActived} resize={resize} className={actived === 'about' ? 'actived' : ''}>
         <header >
           <div className='handle'>
             <VscTerminalCmd size={16} />
