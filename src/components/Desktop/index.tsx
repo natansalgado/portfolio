@@ -1,20 +1,24 @@
 import { Container } from './styles'
+
+import { CMDIcon } from '../CMDIcon'
+import { DiscordIcon } from '../DiscordIcon'
+
 import { CMD } from '../CMD'
-import { IconCMD } from '../IconCMD'
+import { Discord } from '../Discord';
 
 import { useSelector } from 'react-redux';
 import { desktop } from '../../store/desktopSlice';
 
 export const Desktop = () => {
-  const { aboutOpen } = useSelector(desktop)
+  const { aboutOpen, projectsOpen } = useSelector(desktop)
 
   return (
     <Container>
-      <IconCMD />
-      {
-        aboutOpen &&
-        <CMD />
-      }
+      <CMDIcon />
+      <DiscordIcon />
+
+      {aboutOpen && <CMD />}
+      {projectsOpen && <Discord />}
     </Container>
   )
 }

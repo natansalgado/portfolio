@@ -20,6 +20,6 @@ export const Container = styled.button`
 
   h1 {
     font-weight: 300;
-    font-size: 18px;
+    font-size: 16px;
   }
 `

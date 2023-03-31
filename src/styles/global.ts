@@ -18,7 +18,11 @@ export default createGlobalStyle`
     font-family: 'JetBrains Mono', monospace;
   }
 
-  .App {
-    
+  .react-draggable {
+    position: absolute;
+  }
+  
+  .actived {
+    z-index: 99 !important;
   }
 `

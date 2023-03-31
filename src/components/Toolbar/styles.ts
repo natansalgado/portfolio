@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+
 export const Container = styled.div`
   position: fixed;
   z-index: 1;
@@ -10,26 +11,36 @@ export const Container = styled.div`
 
   nav {
     display: flex;
-    gap: 50px;
     align-items: center;
     justify-content: center;
     height: 100%;
+  }
+`
 
-    button {
-      height: 100%;
-      width: 50px;
-      outline: none;
-      border: none;
-      background: transparent;
-      cursor: pointer;
+export const Button = styled.button`
+  position: relative;
 
-      &:hover {
-        background: #0005;
-      }
+  height: 100%;
+  width: 50px;
+  outline: none;
+  border: none;
+  background: transparent;
+  cursor: pointer;
 
-      svg {
-        color: #fff;
-      }
-    }
+  div {
+    position: absolute;
+    bottom: 0;
+
+    height: 3px;
+    width: 100%;
+    background: #fff7;
+  }
+
+  &:hover {
+    background: #0005;
+  }
+
+  svg {
+    color: #fff;
   }
 `

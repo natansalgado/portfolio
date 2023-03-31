@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { Container, Button, Box } from './styles'
 import { IoCloseOutline, IoRemoveOutline } from 'react-icons/io5'
 import { VscTerminalCmd } from 'react-icons/vsc'
@@ -6,21 +6,16 @@ import { TiTabsOutline } from 'react-icons/ti'
 
 import Draggable from 'react-draggable'
 
-import { useDispatch } from 'react-redux'
-import { handleAbout, activeAbout } from '../../store/desktopSlice'
-
-import { useSelector } from 'react-redux'
-import { desktop } from '../../store/desktopSlice'
+import { useDispatch, useSelector } from 'react-redux'
+import { handleProjects, activeProjects, desktop } from '../../store/desktopSlice'
 
 const windowHeight = window.innerHeight
 const windowWidth = window.innerWidth
 
-export const CMD = () => {
+export const Discord = () => {
   const { actived } = useSelector(desktop)
-  const defaultText = 'aaaaaaaaa aaaaaaaaaaaaaa'
   const dispatch = useDispatch()
 
-  const [focus, setFocus] = useState(false)
   const [resize, setResize] = useState(false)
   const [text, setText] = useState('')
 
@@ -32,16 +27,12 @@ export const CMD = () => {
   }
 
   const handleClose = () => {
-    dispatch(handleAbout())
+    dispatch(handleProjects())
   }
 
   const handleActived = () => {
-    dispatch(activeAbout())
+    dispatch(activeProjects())
   }
-
-  useEffect(() => {
-    setTimeout(() => write(defaultText), 1000)
-  }, [])
 
   return (
     <Draggable
@@ -55,11 +46,11 @@ export const CMD = () => {
       bounds={{ left: 0, top: 0, right: windowWidth - ((80 / 100) * windowWidth), bottom: (windowHeight - ((80 / 100) * windowHeight)) - 50 }}
       onStart={handleActived}
     >
-      <Container onFocus={handleActived} resize={resize} className={actived === 'about' ? 'actived' : ''}>
+      <Container onClick={handleActived} resize={resize} className={actived === 'projects' ? 'actived' : ''}>
         <header >
           <div className='handle'>
             <VscTerminalCmd size={16} />
-            <h1>sobre mim.cmd</h1>
+            <h1>meus projetos.dsc</h1>
           </div>
           <div>
             <Button onClick={handleClose} color='#900'>
@@ -67,7 +58,7 @@ export const CMD = () => {
             </Button>
           </div>
         </header >
-        <Box spellCheck='false' autoFocus value={text} onChange={e => setText(e.target.value)} />
+        <Box spellCheck='false' autoFocus />
       </Container >
     </Draggable>
   )
