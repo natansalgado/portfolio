@@ -1,15 +1,14 @@
 import GlobalStyle from './styles/global'
-import { Header } from './components/Header'
-import { About } from './components/About'
-import { Projects } from './components/Projectsda'
-import { Contacts } from './components/Contacts'
+import { Toolbar } from './components/Toolbar'
+import { Desktop } from './components/Desktop'
 
 function App() {
 
 
   return (
     <div className="App">
-      <About />
+      <Desktop />
+      <Toolbar />
       <GlobalStyle />
     </div>
   )

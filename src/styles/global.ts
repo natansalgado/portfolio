@@ -7,23 +7,10 @@ export default createGlobalStyle`
     box-sizing: border-box;
   }
 
-  *::-webkit-scrollbar {
-    width: 15px;
-  }
-
-  *::-webkit-scrollbar-track {
-    background: #222;
-  }
-
-  *::-webkit-scrollbar-thumb {
-    background-color: #555;
-    border-left: 2px solid #222;
-    border-right: 2px solid #222
-  }
-
   html, body, #root {
     height: 100%;
-    background: #bed8d4;
+    background: rgb(67,87,166);
+    background: linear-gradient(45deg, rgba(67,87,166,1) 0%, rgba(110,189,255,1) 100%);
   }
 
   body {

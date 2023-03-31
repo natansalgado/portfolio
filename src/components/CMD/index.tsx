@@ -4,12 +4,13 @@ import { IoCloseOutline, IoRemoveOutline } from 'react-icons/io5'
 import { VscTerminalCmd } from 'react-icons/vsc'
 import { TiTabsOutline } from 'react-icons/ti'
 
-import { NodeResizer } from 'reactflow'
+import Draggable from 'react-draggable'
 
 import { useDispatch } from 'react-redux'
 import { handleOpen } from '../../store/aboutSlice'
 
-import '@reactflow/node-resizer/dist/style.css'
+const windowHeight = window.innerHeight
+const windowWidth = window.innerWidth
 
 export const CMD = () => {
   const defaultText = 'aaaaaaaaa aaaaaaaaaaaaaa'
@@ -34,30 +35,29 @@ export const CMD = () => {
   }, [])
 
   return (
-    <Container resize={resize}>
-      <NodeResizer
-        onResize={() => setResize(true)}
-        minWidth={270}
-        minHeight={200}
-        maxWidth={1350}
-        maxHeight={800}
-        isVisible={true}
-        lineStyle={{ border: '5px transparent solid' }
-        }
-        handleStyle={{ height: '5px', width: '5px', border: 'none', background: 'transparent' }}
-      />
-      < header >
-        <div className='draghandle'>
-          <VscTerminalCmd size={16} />
-          <h1>sobre mim.cmd</h1>
-        </div>
-        <div>
-          <Button onClick={open} color='#900'>
-            <IoCloseOutline size={20} />
-          </Button>
-        </div>
-      </header >
-      <Box spellCheck='false' autoFocus value={text} onChange={e => setText(e.target.value)} />
-    </Container >
+    <Draggable
+      axis="both"
+      handle=".handle"
+      defaultPosition={{
+        x: (windowWidth - ((80 / 100) * windowWidth)) / 2,
+        y: ((windowHeight - ((100 / 100) * windowHeight)) / 2) - 50
+      }}
+      grid={[1, 1]}
+      scale={1}>
+      <Container resize={resize}>
+        <header className='handle' >
+          <div className='draghandle'>
+            <VscTerminalCmd size={16} />
+            <h1>sobre mim.cmd</h1>
+          </div>
+          <div>
+            <Button onClick={open} color='#900'>
+              <IoCloseOutline size={20} />
+            </Button>
+          </div>
+        </header >
+        <Box spellCheck='false' autoFocus value={text} onChange={e => setText(e.target.value)} />
+      </Container >
+    </Draggable>
   )
 }
