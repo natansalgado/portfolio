@@ -2,14 +2,14 @@ import { Container } from "./styles"
 import { HiCommandLine } from 'react-icons/hi2'
 import Draggable from 'react-draggable';
 
-import { handleOpen } from "../../store/aboutSlice"
+import { openAbout } from "../../store/desktopSlice"
 import { useDispatch } from "react-redux"
 
 export const IconCMD = () => {
   const dispatch = useDispatch()
 
   const open = () => {
-    dispatch(handleOpen())
+    dispatch(openAbout())
   }
 
   return (
@@ -19,8 +19,8 @@ export const IconCMD = () => {
       defaultPosition={{ x: 0, y: 0 }}
       grid={[100, 100]}
       scale={1}>
-      <Container onClick={open}>
-        <HiCommandLine className="handle" size={40} />
+      <Container className="handle" onClick={open}>
+        <HiCommandLine size={40} />
         <h1>sobre mim.cmd</h1>
       </Container>
     </Draggable>

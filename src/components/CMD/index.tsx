@@ -7,7 +7,7 @@ import { TiTabsOutline } from 'react-icons/ti'
 import Draggable from 'react-draggable'
 
 import { useDispatch } from 'react-redux'
-import { handleOpen } from '../../store/aboutSlice'
+import { handleAbout } from '../../store/desktopSlice'
 
 const windowHeight = window.innerHeight
 const windowWidth = window.innerWidth
@@ -26,8 +26,8 @@ export const CMD = () => {
     }
   }
 
-  const open = () => {
-    dispatch(handleOpen())
+  const handleClose = () => {
+    dispatch(handleAbout())
   }
 
   useEffect(() => {
@@ -51,7 +51,7 @@ export const CMD = () => {
             <h1>sobre mim.cmd</h1>
           </div>
           <div>
-            <Button onClick={open} color='#900'>
+            <Button onClick={handleClose} color='#900'>
               <IoCloseOutline size={20} />
             </Button>
           </div>

@@ -3,16 +3,16 @@ import { CMD } from '../CMD'
 import { IconCMD } from '../IconCMD'
 
 import { useSelector } from 'react-redux';
-import { about } from '../../store/aboutSlice';
+import { desktop } from '../../store/desktopSlice';
 
 export const Desktop = () => {
-  const { open } = useSelector(about)
+  const { aboutOpen } = useSelector(desktop)
 
   return (
     <Container>
       <IconCMD />
       {
-        open &&
+        aboutOpen &&
         <CMD />
       }
     </Container>

@@ -1,12 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit'
-import aboutReducer from './aboutSlice'
+import desktopReducer from './desktopSlice'
 
 const store = configureStore({
   reducer: {
-    about: aboutReducer
+    desktop: desktopReducer
   }
 })
 
 export default store
-
 export type RootState = ReturnType<typeof store.getState>
