@@ -9,13 +9,20 @@ import { Discord } from '../Discord';
 import { useSelector } from 'react-redux';
 import { desktop } from '../../store/desktopSlice';
 
+const windowHeight = window.innerHeight
+const windowWidth = window.innerWidth
+
 export const Desktop = () => {
   const { aboutOpen, projectsOpen } = useSelector(desktop)
 
   return (
     <Container>
-      <CMDIcon />
-      <DiscordIcon />
+      {windowWidth > 720 &&
+        <>
+          <CMDIcon />
+          <DiscordIcon />
+        </>
+      }
 
       {aboutOpen && <CMD />}
       {projectsOpen && <Discord />}

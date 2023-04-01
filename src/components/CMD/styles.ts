@@ -13,9 +13,6 @@ export const Container = styled.div<Props>`
   border: 1px #fff5 solid;
   background: black;
 
-  min-height: 200px;
-  min-width: 270px;
-
   height: ${({resize}) => resize ? '100%' : '80vh'};
   width: ${({resize}) => resize ? '100%' : '80vw'};
 
@@ -76,22 +73,6 @@ export const Box = styled.textarea`
   resize: none;
   outline: none;
   border: none;
-  
-  &::-webkit-scrollbar {
-    width: 15px;
-    cursor: default;
-  }
-
-  &::-webkit-scrollbar-track {
-    background: #222;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background-color: #555;
-    border-left: 2px solid #222;
-    border-right: 2px solid #222;
-    
-  }
 
   &:focus {
     outline: none;

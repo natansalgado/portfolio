@@ -38,8 +38,6 @@ export const CMD = () => {
     dispatch(activeAbout())
   }
 
-  console.log('renderizado')
-
   useEffect(() => {
     setTimeout(() => write(defaultText), 1000)
   }, [])
