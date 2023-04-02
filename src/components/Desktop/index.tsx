@@ -1,10 +1,11 @@
 import { Container } from './styles'
 
-import { CMDIcon } from '../CMDIcon'
-import { DiscordIcon } from '../DiscordIcon'
+import { AboutIcon } from '../AboutIcon'
+import { ProjectsIcon } from '../ProjectsIcon'
+import { ContactIcon } from '../ContactIcon';
 
-import { CMD } from '../CMD'
-import { Discord } from '../Discord';
+import { About } from '../About'
+import { Projects } from '../Projects';
 
 import { useSelector } from 'react-redux';
 import { desktop } from '../../store/desktopSlice';
@@ -19,13 +20,14 @@ export const Desktop = () => {
     <Container>
       {windowWidth > 720 &&
         <>
-          <CMDIcon />
-          <DiscordIcon />
+          <AboutIcon />
+          <ProjectsIcon />
+          <ContactIcon />
         </>
       }
 
-      {aboutOpen && <CMD />}
-      {projectsOpen && <Discord />}
+      {aboutOpen && <About />}
+      {projectsOpen && <Projects />}
     </Container>
   )
 }

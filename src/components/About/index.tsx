@@ -13,7 +13,7 @@ import { useSelector } from 'react-redux'
 import { desktop } from '../../store/desktopSlice'
 import { MdCropSquare } from 'react-icons/md'
 
-export const CMD = () => {
+export const About = () => {
   const [windowHeight] = useState(window.innerHeight)
   const [windowWidth] = useState(window.innerWidth)
 

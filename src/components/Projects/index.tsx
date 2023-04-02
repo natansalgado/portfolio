@@ -12,7 +12,7 @@ import { handleProjects, activeProjects, setProject, desktop } from '../../store
 
 import { projects } from '../../apis/projects'
 
-export const Discord = () => {
+export const Projects = () => {
   const [windowHeight] = useState(window.innerHeight)
   const [windowWidth] = useState(window.innerWidth)
 

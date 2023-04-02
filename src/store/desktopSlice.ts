@@ -8,6 +8,7 @@ interface State {
   project: number | null
   aboutPosition: { x: number, y: number }
   projectsPosition: { x: number, y: number }
+  contactPosition: { x: number, y: number }
 }
 
 const initialState: State = {
@@ -16,7 +17,8 @@ const initialState: State = {
   projectsOpen: false,
   project: null,
   aboutPosition: { x: 0, y: 0 },
-  projectsPosition: { x: 0, y: 100 }
+  projectsPosition: { x: 0, y: 100 },
+  contactPosition: { x: 0, y: 200 }
 }
 
 const slice = createSlice({
@@ -63,14 +65,23 @@ const slice = createSlice({
     // ICONS POSITION
     setAboutPosition: (state, { payload }) => {
       const { x, y } = payload
-      if (JSON.stringify(payload) !== JSON.stringify(state.projectsPosition)) {
+      if (JSON.stringify(payload) !== JSON.stringify(state.projectsPosition) &&
+        JSON.stringify(payload) !== JSON.stringify(state.contactPosition)) {
         return { ...state, aboutPosition: { x, y } }
       }
     },
     setProjectsPosition: (state, { payload }) => {
       const { x, y } = payload
-      if (JSON.stringify(payload) !== JSON.stringify(state.aboutPosition)) {
+      if (JSON.stringify(payload) !== JSON.stringify(state.aboutPosition) &&
+        JSON.stringify(payload) !== JSON.stringify(state.contactPosition)) {
         return { ...state, projectsPosition: { x, y } }
+      }
+    },
+    setContactPosition: (state, { payload }) => {
+      const { x, y } = payload
+      if (JSON.stringify(payload) !== JSON.stringify(state.aboutPosition) &&
+        JSON.stringify(payload) !== JSON.stringify(state.projectsPosition)) {
+        return { ...state, contactPosition: { x, y } }
       }
     }
   }
@@ -79,7 +90,7 @@ const slice = createSlice({
 export const {
   openAbout, handleAbout, activeAbout,
   openProjects, handleProjects, activeProjects, setProject,
-  setAboutPosition, setProjectsPosition
+  setAboutPosition, setProjectsPosition, setContactPosition
 } = slice.actions
 
 export const desktop = (state: RootState) => state.desktop
