@@ -1,15 +1,16 @@
 import { Button, Container } from './styles'
 import { HiCommandLine } from 'react-icons/hi2'
 import { BsDiscord } from 'react-icons/bs'
+import { BsWhatsapp } from 'react-icons/bs'
 
 import { useDispatch } from 'react-redux'
-import { handleAbout, handleProjects } from '../../store/desktopSlice'
+import { handleAbout, handleContact, handleProjects } from '../../store/desktopSlice'
 
 import { useSelector } from 'react-redux'
 import { desktop } from '../../store/desktopSlice'
 
 export const Toolbar = () => {
-  const { aboutOpen, projectsOpen } = useSelector(desktop)
+  const { aboutOpen, projectsOpen, contactOpen } = useSelector(desktop)
   const dispatch = useDispatch()
 
   const aboutHandler = () => {
@@ -18,6 +19,10 @@ export const Toolbar = () => {
 
   const projectsHandler = () => {
     dispatch(handleProjects())
+  }
+
+  const contactHandler = () => {
+    dispatch(handleContact())
   }
 
   return (
@@ -33,6 +38,13 @@ export const Toolbar = () => {
         <Button onClick={projectsHandler}>
           <BsDiscord size={30} />
           {projectsOpen &&
+            <div />
+          }
+        </Button>
+
+        <Button onClick={contactHandler}>
+          <BsWhatsapp size={26} />
+          {contactOpen &&
             <div />
           }
         </Button>

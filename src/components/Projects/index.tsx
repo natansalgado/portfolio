@@ -8,7 +8,7 @@ import { MdCropSquare } from 'react-icons/md'
 import Draggable, { DraggableData, DraggableEvent } from 'react-draggable'
 
 import { useDispatch, useSelector } from 'react-redux'
-import { handleProjects, activeProjects, setProject, desktop } from '../../store/desktopSlice'
+import { closeProjects, activeProjects, setProject, desktop } from '../../store/desktopSlice'
 
 import { projects } from '../../apis/projects'
 
@@ -35,7 +35,7 @@ export const Projects = ({ isDesktop, windowSize }: Props) => {
   })
 
   const handleClose = () => {
-    dispatch(handleProjects())
+    dispatch(closeProjects())
   }
 
   const handleActived = () => {
@@ -81,7 +81,7 @@ export const Projects = ({ isDesktop, windowSize }: Props) => {
   useEffect(() => {
     setWindowHeight(windowSize.height)
     setWindowWidth(windowSize.width)
-    setPosition({
+    !fullScreen && setPosition({
       x: isDesktop ? (windowWidth - ((80 / 100) * windowWidth)) / 2 : 0,
       y: isDesktop ? (windowHeight - ((80 / 100) * windowHeight)) / 2 - 50 : 0
     })

@@ -2,29 +2,29 @@ import { Container } from "./styles"
 import { BsWhatsapp } from 'react-icons/bs'
 import Draggable, { DraggableData, DraggableEvent } from 'react-draggable';
 
-import { openAbout, setContactPosition, desktop } from "../../store/desktopSlice"
+import { openContact, setContactIconPosition, desktop } from "../../store/desktopSlice"
 import { useDispatch, useSelector } from "react-redux"
 import { useState } from "react";
 
 export const ContactIcon = () => {
-  const { contactPosition } = useSelector(desktop)
+  const { contactIconPosition } = useSelector(desktop)
   const dispatch = useDispatch()
   const [canOpen, setCanOpen] = useState(true)
 
   const openHandler = () => {
-    canOpen && dispatch(openAbout())
+    canOpen && dispatch(openContact())
   }
 
   const handleOnStop = (e: DraggableEvent, data: DraggableData) => {
     setTimeout(() => { setCanOpen(true) })
-    dispatch(setContactPosition({ x: data.x, y: data.y }))
+    dispatch(setContactIconPosition({ x: data.x, y: data.y }))
   }
 
   return (
     <Draggable
       axis="both"
       handle=".handle"
-      position={contactPosition}
+      position={contactIconPosition}
       grid={[100, 100]}
       scale={1}
       bounds={{ left: 0, top: 0, right: window.innerWidth - 100, bottom: window.innerHeight - 200 }}

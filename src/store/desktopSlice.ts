@@ -5,20 +5,22 @@ interface State {
   actived: string
   aboutOpen: boolean
   projectsOpen: boolean
+  contactOpen: boolean
   project: number | null
-  aboutPosition: { x: number, y: number }
-  projectsPosition: { x: number, y: number }
-  contactPosition: { x: number, y: number }
+  aboutIconPosition: { x: number, y: number }
+  projectsIconPosition: { x: number, y: number }
+  contactIconPosition: { x: number, y: number }
 }
 
 const initialState: State = {
   actived: 'none',
   aboutOpen: false,
   projectsOpen: false,
+  contactOpen: false,
   project: null,
-  aboutPosition: { x: 0, y: 0 },
-  projectsPosition: { x: 0, y: 100 },
-  contactPosition: { x: 0, y: 200 }
+  aboutIconPosition: { x: 0, y: 0 },
+  projectsIconPosition: { x: 0, y: 100 },
+  contactIconPosition: { x: 0, y: 200 }
 }
 
 const slice = createSlice({
@@ -29,8 +31,11 @@ const slice = createSlice({
     openAbout: (state) => {
       return { ...state, aboutOpen: true, actived: 'about' }
     },
+    closeAbout: (state) => {
+      return { ...state, aboutOpen: false, actived: 'none' }
+    },
     handleAbout: (state) => {
-      if (state.aboutOpen && !state.projectsOpen) {
+      if (state.aboutOpen && !state.projectsOpen && !state.contactOpen) {
         return { ...state, aboutOpen: false, actived: 'none' }
       }
       if (state.aboutOpen && state.actived !== 'about') {
@@ -46,8 +51,11 @@ const slice = createSlice({
     openProjects: (state) => {
       return { ...state, projectsOpen: true, actived: 'projects' }
     },
+    closeProjects: (state) => {
+      return { ...state, projectsOpen: false, actived: 'none' }
+    },
     handleProjects: (state) => {
-      if (state.projectsOpen && !state.aboutOpen) {
+      if (state.projectsOpen && !state.aboutOpen && !state.contactOpen) {
         return { ...state, projectsOpen: false, actived: 'none' }
       }
       if (state.projectsOpen && state.actived !== 'projects') {
@@ -62,35 +70,56 @@ const slice = createSlice({
       return { ...state, project: payload }
     },
 
+    // CONTACT
+    openContact: (state) => {
+      return { ...state, contactOpen: true, actived: 'contact' }
+    },
+    closeContact: (state) => {
+      return { ...state, contactOpen: false, actived: 'none' }
+    },
+    handleContact: (state) => {
+      if (state.contactOpen && !state.aboutOpen && !state.projectsOpen) {
+        return { ...state, contactOpen: false, actived: 'none' }
+      }
+      if (state.contactOpen && state.actived !== 'contact') {
+        return { ...state, actived: 'contact' }
+      }
+      return { ...state, contactOpen: !state.contactOpen, actived: !state.contactOpen ? 'contact' : 'none' }
+    },
+    activeContact: (state) => {
+      return { ...state, actived: 'contact' }
+    },
+
     // ICONS POSITION
-    setAboutPosition: (state, { payload }) => {
+    setAboutIconPosition: (state, { payload }) => {
       const { x, y } = payload
-      if (JSON.stringify(payload) !== JSON.stringify(state.projectsPosition) &&
-        JSON.stringify(payload) !== JSON.stringify(state.contactPosition)) {
-        return { ...state, aboutPosition: { x, y } }
+      if (JSON.stringify(payload) !== JSON.stringify(state.projectsIconPosition) &&
+        JSON.stringify(payload) !== JSON.stringify(state.contactIconPosition)) {
+        return { ...state, aboutIconPosition: { x, y } }
       }
     },
-    setProjectsPosition: (state, { payload }) => {
+    setProjectsIconPosition: (state, { payload }) => {
       const { x, y } = payload
-      if (JSON.stringify(payload) !== JSON.stringify(state.aboutPosition) &&
-        JSON.stringify(payload) !== JSON.stringify(state.contactPosition)) {
-        return { ...state, projectsPosition: { x, y } }
+      if (JSON.stringify(payload) !== JSON.stringify(state.aboutIconPosition) &&
+        JSON.stringify(payload) !== JSON.stringify(state.contactIconPosition)) {
+        return { ...state, projectsIconPosition: { x, y } }
       }
     },
-    setContactPosition: (state, { payload }) => {
+    setContactIconPosition: (state, { payload }) => {
       const { x, y } = payload
-      if (JSON.stringify(payload) !== JSON.stringify(state.aboutPosition) &&
-        JSON.stringify(payload) !== JSON.stringify(state.projectsPosition)) {
-        return { ...state, contactPosition: { x, y } }
+      if (JSON.stringify(payload) !== JSON.stringify(state.aboutIconPosition) &&
+        JSON.stringify(payload) !== JSON.stringify(state.projectsIconPosition)) {
+        return { ...state, contactIconPosition: { x, y } }
       }
     }
   }
 })
 
 export const {
-  openAbout, handleAbout, activeAbout,
-  openProjects, handleProjects, activeProjects, setProject,
-  setAboutPosition, setProjectsPosition, setContactPosition
+  openAbout, closeAbout, handleAbout, activeAbout,
+  openProjects, closeProjects, handleProjects, activeProjects, setProject,
+  openContact, closeContact, handleContact, activeContact,
+  setAboutIconPosition, setProjectsIconPosition, setContactIconPosition
 } = slice.actions
 
 export const desktop = (state: RootState) => state.desktop

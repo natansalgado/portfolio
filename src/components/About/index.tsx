@@ -7,7 +7,7 @@ import { TiTabsOutline } from 'react-icons/ti'
 import Draggable, { DraggableData, DraggableEvent } from 'react-draggable'
 
 import { useDispatch } from 'react-redux'
-import { handleAbout, activeAbout } from '../../store/desktopSlice'
+import { closeAbout, activeAbout } from '../../store/desktopSlice'
 
 import { useSelector } from 'react-redux'
 import { desktop } from '../../store/desktopSlice'
@@ -18,12 +18,25 @@ interface Props {
   windowSize: { width: number, height: number }
 }
 
+const defaultText = `Olá, meu nome é Natan Salgado,
+tenho 20 anos e sou desenvolvedor frontend.
+    
+Minha primeira interação com programação aconteceu entre os meus 15 e os 16 anos.
+Aprendi o básico, mas logo deixei para lá...
+  
+Entretanto, em junho de 2022, fui atraído novamente e desde então tenho me interessado cada vez mais pela área.
+  
+Atualmente, domino mais a área do Frontend,
+mas tenho bastante interesse em aprender mais sobre Backend futuramente.
+
+>`
+
 export const About = ({ isDesktop, windowSize }: Props) => {
   const [windowHeight, setWindowHeight] = useState(windowSize.height)
   const [windowWidth, setWindowWidth] = useState(windowSize.width)
 
   const { actived } = useSelector(desktop)
-  const defaultText = 'aaaaaaaaa aaaaaaaaaaaaaa'
+
   const dispatch = useDispatch()
 
   const [text, setText] = useState('')
@@ -42,7 +55,7 @@ export const About = ({ isDesktop, windowSize }: Props) => {
   }
 
   const handleClose = () => {
-    dispatch(handleAbout())
+    dispatch(closeAbout())
   }
 
   const handleActived = () => {
@@ -74,7 +87,7 @@ export const About = ({ isDesktop, windowSize }: Props) => {
   useEffect(() => {
     setWindowHeight(windowSize.height)
     setWindowWidth(windowSize.width)
-    setPosition({
+    !fullScreen && setPosition({
       x: isDesktop ? (windowWidth - ((80 / 100) * windowWidth)) / 2 : 0,
       y: isDesktop ? (windowHeight - ((80 / 100) * windowHeight)) / 2 - 50 : 0
     })
@@ -96,7 +109,7 @@ export const About = ({ isDesktop, windowSize }: Props) => {
       onStop={handleOnStop}
       position={isDesktop ? position : { x: 0, y: 0 }}
     >
-      <Container onFocus={handleActived} onClick={handleActived} fullScreen={fullScreen} isDesktop={isDesktop} className={actived === 'about' ? 'actived' : ''}>
+      <Container onClick={handleActived} fullScreen={fullScreen} isDesktop={isDesktop} className={actived === 'about' ? 'actived' : ''}>
         <div className='header' >
           <div className='handle'>
             <VscTerminalCmd size={16} />
