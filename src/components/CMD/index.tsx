@@ -4,7 +4,7 @@ import { IoCloseOutline, IoRemoveOutline } from 'react-icons/io5'
 import { VscTerminalCmd } from 'react-icons/vsc'
 import { TiTabsOutline } from 'react-icons/ti'
 
-import Draggable from 'react-draggable'
+import Draggable, { DraggableData, DraggableEvent } from 'react-draggable'
 
 import { useDispatch } from 'react-redux'
 import { handleAbout, activeAbout } from '../../store/desktopSlice'
@@ -26,7 +26,7 @@ export const CMD = () => {
   const [fullScreen, setFullScreen] = useState(false)
   const [position, setPosition] = useState({
     x: isDesktop ? (windowWidth - ((80 / 100) * windowWidth)) / 2 : 0,
-    y: isDesktop ? (windowHeight - ((80 / 100) * windowHeight)) / 2 - 50 : 0
+    y: isDesktop ? (windowHeight - ((80 / 100) * windowHeight)) / 2 - 25 : 0
   })
 
 
@@ -52,12 +52,12 @@ export const CMD = () => {
     } else {
       setPosition({
         x: isDesktop ? (windowWidth - ((80 / 100) * windowWidth)) / 2 : 0,
-        y: isDesktop ? (windowHeight - ((80 / 100) * windowHeight)) / 2 - 50 : 0
+        y: isDesktop ? (windowHeight - ((80 / 100) * windowHeight)) / 2 - 25 : 0
       })
     }
   }
 
-  const handleDrag = (e: any, data: any) => {
+  const handleOnStop = (e: DraggableEvent, data: DraggableData) => {
     if (!fullScreen) {
       setPosition({ x: data.x, y: data.y })
     }
@@ -75,12 +75,12 @@ export const CMD = () => {
       bounds={isDesktop ? fullScreen ?
         { left: 0, top: 0, right: 0, bottom: 0 }
         :
-        { left: 0, top: 0, right: windowWidth - ((80 / 100) * windowWidth), bottom: (windowHeight - ((80 / 100) * windowHeight)) - 80 }
+        { left: 0, top: 0, right: windowWidth - ((80 / 100) * windowWidth), bottom: (windowHeight - ((80 / 100) * windowHeight)) - 50 }
         :
         { left: 0, top: 0, right: 0, bottom: 0 }
       }
       onStart={handleActived}
-      onStop={handleDrag}
+      onStop={handleOnStop}
       position={isDesktop ? position : { x: 0, y: 0 }}
     >
       <Container onFocus={handleActived} onClick={handleActived} fullScreen={fullScreen} isDesktop={isDesktop} className={actived === 'about' ? 'actived' : ''}>

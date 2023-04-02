@@ -1,11 +1,11 @@
-import { useRef, useState } from 'react'
+import { KeyboardEvent, useRef, useState } from 'react'
 import { Container, Button, Box, Column, Content, Project, Footer } from './styles'
 import { IoCloseOutline, IoRemoveOutline } from 'react-icons/io5'
 import { BsGithub, BsPlayFill } from 'react-icons/bs'
 import { TiTabsOutline } from 'react-icons/ti'
 import { MdCropSquare } from 'react-icons/md'
 
-import Draggable from 'react-draggable'
+import Draggable, { DraggableData, DraggableEvent } from 'react-draggable'
 
 import { useDispatch, useSelector } from 'react-redux'
 import { handleProjects, activeProjects, setProject, desktop } from '../../store/desktopSlice'
@@ -56,13 +56,13 @@ export const Discord = () => {
     }
   }
 
-  const handleDrag = (e: any, data: any) => {
+  const handleOnStop = (e: DraggableEvent, data: DraggableData) => {
     if (!fullScreen) {
       setPosition({ x: data.x, y: data.y })
     }
   }
 
-  const submit = (e: any) => {
+  const submit = (e: KeyboardEvent) => {
     if (e.key === 'Enter') {
       if (chat) {
         setChatArray(prev => [...prev, chat])
@@ -87,7 +87,7 @@ export const Discord = () => {
         { left: 0, top: 0, right: 0, bottom: 0 }
       }
       onStart={handleActived}
-      onStop={handleDrag}
+      onStop={handleOnStop}
       position={isDesktop ? position : { x: 0, y: 0 }}
     >
       <Container onClick={handleActived} fullScreen={fullScreen} isDesktop={isDesktop} className={actived === 'projects' ? 'actived' : ''}>

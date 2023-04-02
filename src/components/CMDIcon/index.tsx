@@ -1,12 +1,13 @@
 import { Container } from "./styles"
 import { HiCommandLine } from 'react-icons/hi2'
-import Draggable from 'react-draggable';
+import Draggable, { DraggableData, DraggableEvent } from 'react-draggable';
 
-import { openAbout } from "../../store/desktopSlice"
-import { useDispatch } from "react-redux"
+import { openAbout, setAboutPosition, desktop } from "../../store/desktopSlice"
+import { useDispatch, useSelector } from "react-redux"
 import { useState } from "react";
 
 export const CMDIcon = () => {
+  const { aboutPosition } = useSelector(desktop)
   const dispatch = useDispatch()
   const [canOpen, setCanOpen] = useState(true)
 
@@ -14,20 +15,21 @@ export const CMDIcon = () => {
     canOpen && dispatch(openAbout())
   }
 
-  const handleCanOpen = () => {
+  const handleOnStop = (e: DraggableEvent, data: DraggableData) => {
     setTimeout(() => { setCanOpen(true) })
+    dispatch(setAboutPosition({ x: data.x, y: data.y }))
   }
 
   return (
     <Draggable
       axis="both"
       handle=".handle"
-      defaultPosition={{ x: 0, y: 0 }}
+      position={aboutPosition}
       grid={[100, 100]}
       scale={1}
       bounds={{ left: 0, top: 0, right: window.innerWidth - 100, bottom: window.innerHeight - 200 }}
       onDrag={() => setCanOpen(false)}
-      onStop={handleCanOpen}
+      onStop={handleOnStop}
     >
       <Container className="handle" onClick={openHandler} >
         <HiCommandLine size={40} />
