@@ -11,17 +11,24 @@ import { handleAbout, activeAbout } from '../../store/desktopSlice'
 
 import { useSelector } from 'react-redux'
 import { desktop } from '../../store/desktopSlice'
-
-const windowHeight = window.innerHeight
-const windowWidth = window.innerWidth
+import { MdCropSquare } from 'react-icons/md'
 
 export const CMD = () => {
+  const [windowHeight] = useState(window.innerHeight)
+  const [windowWidth] = useState(window.innerWidth)
+
   const { actived } = useSelector(desktop)
   const defaultText = 'aaaaaaaaa aaaaaaaaaaaaaa'
   const dispatch = useDispatch()
 
-  const [resize, setResize] = useState(false)
   const [text, setText] = useState('')
+  const [isDesktop] = useState(windowWidth >= 720 ? true : false)
+  const [fullScreen, setFullScreen] = useState(false)
+  const [position, setPosition] = useState({
+    x: isDesktop ? (windowWidth - ((80 / 100) * windowWidth)) / 2 : 0,
+    y: isDesktop ? (windowHeight - ((80 / 100) * windowHeight)) / 2 - 50 : 0
+  })
+
 
   const write = (text: string, i = 0) => {
     if (i < text.length) {
@@ -38,6 +45,24 @@ export const CMD = () => {
     dispatch(activeAbout())
   }
 
+  const handleFullScreen = () => {
+    setFullScreen(!fullScreen)
+    if (!fullScreen) {
+      setPosition({ x: 0, y: 0 })
+    } else {
+      setPosition({
+        x: isDesktop ? (windowWidth - ((80 / 100) * windowWidth)) / 2 : 0,
+        y: isDesktop ? (windowHeight - ((80 / 100) * windowHeight)) / 2 - 50 : 0
+      })
+    }
+  }
+
+  const handleDrag = (e: any, data: any) => {
+    if (!fullScreen) {
+      setPosition({ x: data.x, y: data.y })
+    }
+  }
+
   useEffect(() => {
     setTimeout(() => write(defaultText), 1000)
   }, [])
@@ -46,21 +71,39 @@ export const CMD = () => {
     <Draggable
       axis="both"
       handle=".handle"
-      defaultPosition={{
-        x: (windowWidth - ((80 / 100) * windowWidth)) / 2,
-        y: (windowHeight - ((80 / 100) * windowHeight)) / 2
-      }}
       scale={1}
-      bounds={{ left: 0, top: 0, right: windowWidth - ((80 / 100) * windowWidth), bottom: (windowHeight - ((80 / 100) * windowHeight)) - 50 }}
+      bounds={isDesktop ? fullScreen ?
+        { left: 0, top: 0, right: 0, bottom: 0 }
+        :
+        { left: 0, top: 0, right: windowWidth - ((80 / 100) * windowWidth), bottom: (windowHeight - ((80 / 100) * windowHeight)) - 80 }
+        :
+        { left: 0, top: 0, right: 0, bottom: 0 }
+      }
       onStart={handleActived}
+      onStop={handleDrag}
+      position={isDesktop ? position : { x: 0, y: 0 }}
     >
-      <Container onFocus={handleActived} onClick={handleActived} resize={resize} className={actived === 'about' ? 'actived' : ''}>
+      <Container onFocus={handleActived} onClick={handleActived} fullScreen={fullScreen} isDesktop={isDesktop} className={actived === 'about' ? 'actived' : ''}>
         <header >
           <div className='handle'>
             <VscTerminalCmd size={16} />
             <h1>sobre mim.cmd</h1>
           </div>
           <div>
+          {isDesktop &&
+              <>
+                <Button onClick={handleClose} color='#fff1'>
+                  <IoRemoveOutline size={20} />
+                </Button>
+                <Button onClick={handleFullScreen} color='#fff1'>
+                  {fullScreen ?
+                    <TiTabsOutline size={16} />
+                    :
+                    <MdCropSquare size={16} />
+                  }
+                </Button>
+              </>
+            }
             <Button onClick={handleClose} color='#900'>
               <IoCloseOutline size={20} />
             </Button>

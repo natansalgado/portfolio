@@ -57,7 +57,9 @@ export const Discord = () => {
   }
 
   const handleDrag = (e: any, data: any) => {
-    setPosition({ x: data.x, y: data.y })
+    if (!fullScreen) {
+      setPosition({ x: data.x, y: data.y })
+    }
   }
 
   const submit = (e: any) => {
@@ -71,8 +73,6 @@ export const Discord = () => {
       }
     }
   }
-
-  console.log('renderizado')
 
   return (
     <Draggable

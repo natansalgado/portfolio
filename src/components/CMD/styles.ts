@@ -1,8 +1,10 @@
 import styled from "styled-components"
 
 interface Props {
-  resize?: boolean
+  isDesktop?: boolean
+  fullScreen?: boolean
   color?: string
+  projectOn?: boolean
 }
 
 export const Container = styled.div<Props>`
@@ -13,8 +15,8 @@ export const Container = styled.div<Props>`
   border: 1px #fff5 solid;
   background: black;
 
-  height: ${({resize}) => resize ? '100%' : '80vh'};
-  width: ${({resize}) => resize ? '100%' : '80vw'};
+  height: ${({ isDesktop, fullScreen }) => isDesktop ? fullScreen ? 'calc(100% - 50px)' : '80vh' : 'calc(100% - 50px)'};
+  width: ${({ isDesktop, fullScreen }) => isDesktop ? fullScreen ? '100vw' : '80vw' : '100%'};
 
   header {
     display: flex;
