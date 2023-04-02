@@ -1,4 +1,4 @@
-import { KeyboardEvent, useRef, useState } from 'react'
+import { KeyboardEvent, useEffect, useRef, useState } from 'react'
 import { Container, Button, Box, Column, Content, Project, Footer } from './styles'
 import { IoCloseOutline, IoRemoveOutline } from 'react-icons/io5'
 import { BsGithub, BsPlayFill } from 'react-icons/bs'
@@ -12,9 +12,14 @@ import { handleProjects, activeProjects, setProject, desktop } from '../../store
 
 import { projects } from '../../apis/projects'
 
-export const Projects = () => {
-  const [windowHeight] = useState(window.innerHeight)
-  const [windowWidth] = useState(window.innerWidth)
+interface Props {
+  isDesktop: boolean
+  windowSize: { width: number, height: number }
+}
+
+export const Projects = ({ isDesktop, windowSize }: Props) => {
+  const [windowHeight, setWindowHeight] = useState(windowSize.height)
+  const [windowWidth, setWindowWidth] = useState(windowSize.width)
 
   const { actived, project } = useSelector(desktop)
   const dispatch = useDispatch()
@@ -23,7 +28,6 @@ export const Projects = () => {
   const [chat, setChat] = useState('')
   const [chatArray, setChatArray] = useState<string[]>([])
 
-  const [isDesktop] = useState(windowWidth >= 720 ? true : false)
   const [fullScreen, setFullScreen] = useState(false)
   const [position, setPosition] = useState({
     x: isDesktop ? (windowWidth - ((80 / 100) * windowWidth)) / 2 : 0,
@@ -74,6 +78,15 @@ export const Projects = () => {
     }
   }
 
+  useEffect(() => {
+    setWindowHeight(windowSize.height)
+    setWindowWidth(windowSize.width)
+    setPosition({
+      x: isDesktop ? (windowWidth - ((80 / 100) * windowWidth)) / 2 : 0,
+      y: isDesktop ? (windowHeight - ((80 / 100) * windowHeight)) / 2 - 50 : 0
+    })
+  }, [windowSize])
+
   return (
     <Draggable
       axis="both"
@@ -91,9 +104,9 @@ export const Projects = () => {
       position={isDesktop ? position : { x: 0, y: 0 }}
     >
       <Container onClick={handleActived} fullScreen={fullScreen} isDesktop={isDesktop} className={actived === 'projects' ? 'actived' : ''}>
-        <header >
+        <div className='header' >
           <div className='handle' />
-          <div>
+          <div className='buttons'>
             {isDesktop &&
               <>
                 <Button onClick={handleClose} color='#fff1'>
@@ -112,12 +125,12 @@ export const Projects = () => {
               <IoCloseOutline size={20} />
             </Button>
           </div>
-        </header >
+        </div >
         <Box>
           <Column>
-            <header>
+            <div className='header'>
               <h1>Projetos</h1>
-            </header>
+            </div>
             <div className='column-items'>
               {projects.map((project, index) =>
                 <Project onClick={() => handleProject(index)} projectOn={project.on} key={index}>
@@ -138,9 +151,9 @@ export const Projects = () => {
           <Content>
             {project !== null ?
               <>
-                <header>
+                <div className='header'>
                   <h1>{projects[project].title}</h1>
-                </header>
+                </div>
                 <div ref={scrollRef} className='body'>
                   {project < 2 &&
                     <div className='section first'>imagens de exemplo</div>
@@ -181,9 +194,9 @@ export const Projects = () => {
               </>
               :
               <>
-                <header>
+                <div className='header'>
                   <h1>início</h1>
-                </header>
+                </div>
                 <div className='body'>
                   <p>clique em um projeto para exibir...</p>
                   {chatArray.map((message, index) =>

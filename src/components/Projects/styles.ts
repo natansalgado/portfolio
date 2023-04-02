@@ -11,10 +11,12 @@ export const Container = styled.div<Props>`
   height: ${({ isDesktop, fullScreen }) => isDesktop ? fullScreen ? 'calc(100% - 80px)' : '80vh' : 'calc(100% - 80px)'};
   width: ${({ isDesktop, fullScreen }) => isDesktop ? fullScreen ? '100vw' : '80vw' : '100%'};
 
-  header {
+  .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    width: 100%;
+    height: 30px;
 
     background: #1e2124;
     
@@ -22,10 +24,11 @@ export const Container = styled.div<Props>`
       display: flex;
       align-items: center;
       height: 30px;
-      
-      &:first-child {
-        width: 100%;
-      }
+    }
+
+    .handle {
+      width: 100%;
+      cursor: grab;
     }
   }
 `
@@ -40,10 +43,6 @@ export const Button = styled.button<Props>`
 
   &:hover {
     background: ${({ color }) => color};
-  }
-
-  &:active {
-    filter: brightness(1.2);
   }
 `
 
@@ -85,9 +84,10 @@ export const Column = styled.div`
   height: 100%;
   width: 200px;
 
-  @media (max-width: 430px) {
+  @media (max-width: 600px) {
     width: 100px;
   }
+
   
   .column-items {
     padding: 5px;
@@ -95,21 +95,38 @@ export const Column = styled.div`
     height: 100%;
   }
 
-  header {
+  .header {
     background: transparent;
     padding: 15px;
     border-bottom: 1px solid #0004;
     height: 50px;
 
-    @media (max-width: 430px) {
-      padding: 5px;
-      height: 55px;
+    @media (max-width: 600px) {
+      padding: 15px 5px;
+      height: 50px;
+    }
+
+    @media (max-width: 500px) {
+      padding: 15px 5px;
+      height: 50px;
+      text-align: center;
     }
     
     h1 {
       font-weight: 500;
       font-size: 16px;
       text-transform: uppercase;
+      width: 100%;
+
+      @media (max-width: 600px) {
+        font-size: 14px;
+        line-height: 20px
+      }
+
+      @media (max-width: 500px) {
+        font-size: 12px;
+        line-height: 20px
+      }
     }
   }
 
@@ -123,7 +140,7 @@ export const Content = styled.div`
   width: 100%;
   overflow: hidden;
   
-  header {
+  .header {
     background: transparent;
     padding: 15px;
     border-bottom: 1px solid #0004;
@@ -243,8 +260,12 @@ export const Project = styled.button<Props>`
     background: transparent;
     border: none;
 
-    @media (max-width: 430px) {
+    @media (max-width: 600px) {
       flex-direction: column;
+    }
+
+    @media (max-width: 500px) {
+      padding: 5px 0;
     }
 
     .image {

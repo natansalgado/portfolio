@@ -18,7 +18,7 @@ export const Container = styled.div<Props>`
   height: ${({ isDesktop, fullScreen }) => isDesktop ? fullScreen ? 'calc(100% - 50px)' : '80vh' : 'calc(100% - 50px)'};
   width: ${({ isDesktop, fullScreen }) => isDesktop ? fullScreen ? '100vw' : '80vw' : '100%'};
 
-  header {
+  .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -29,19 +29,19 @@ export const Container = styled.div<Props>`
     div {
       display: flex;
       align-items: center;
-      height: 100%;
-      
-      &:first-child {
-        width: 100%;
-        height: 100%;
-        padding-left: 10px;
-        gap: 10px;
-      }
+      height: 100%; 
+    }
 
+    .handle {
+      width: 100%;
+      height: 100%;
+      padding-left: 10px;
+      gap: 10px;
+      cursor: grab;
+      
       h1 {
         font-size: 14px;
         font-weight: 400;
-        cursor: default;
       }
     }
   }
@@ -58,10 +58,6 @@ export const Button = styled.button<Props>`
 
   &:hover {
     background: ${({ color }) => color};
-  }
-
-  &:active {
-    filter: brightness(1.2);
   }
 `
 

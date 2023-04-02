@@ -13,16 +13,20 @@ import { useSelector } from 'react-redux'
 import { desktop } from '../../store/desktopSlice'
 import { MdCropSquare } from 'react-icons/md'
 
-export const About = () => {
-  const [windowHeight] = useState(window.innerHeight)
-  const [windowWidth] = useState(window.innerWidth)
+interface Props {
+  isDesktop: boolean
+  windowSize: { width: number, height: number }
+}
+
+export const About = ({ isDesktop, windowSize }: Props) => {
+  const [windowHeight, setWindowHeight] = useState(windowSize.height)
+  const [windowWidth, setWindowWidth] = useState(windowSize.width)
 
   const { actived } = useSelector(desktop)
   const defaultText = 'aaaaaaaaa aaaaaaaaaaaaaa'
   const dispatch = useDispatch()
 
   const [text, setText] = useState('')
-  const [isDesktop] = useState(windowWidth >= 720 ? true : false)
   const [fullScreen, setFullScreen] = useState(false)
   const [position, setPosition] = useState({
     x: isDesktop ? (windowWidth - ((80 / 100) * windowWidth)) / 2 : 0,
@@ -67,6 +71,15 @@ export const About = () => {
     setTimeout(() => write(defaultText), 1000)
   }, [])
 
+  useEffect(() => {
+    setWindowHeight(windowSize.height)
+    setWindowWidth(windowSize.width)
+    setPosition({
+      x: isDesktop ? (windowWidth - ((80 / 100) * windowWidth)) / 2 : 0,
+      y: isDesktop ? (windowHeight - ((80 / 100) * windowHeight)) / 2 - 50 : 0
+    })
+  }, [windowSize])
+
   return (
     <Draggable
       axis="both"
@@ -84,13 +97,13 @@ export const About = () => {
       position={isDesktop ? position : { x: 0, y: 0 }}
     >
       <Container onFocus={handleActived} onClick={handleActived} fullScreen={fullScreen} isDesktop={isDesktop} className={actived === 'about' ? 'actived' : ''}>
-        <header >
+        <div className='header' >
           <div className='handle'>
             <VscTerminalCmd size={16} />
             <h1>sobre mim.cmd</h1>
           </div>
           <div>
-          {isDesktop &&
+            {isDesktop &&
               <>
                 <Button onClick={handleClose} color='#fff1'>
                   <IoRemoveOutline size={20} />
@@ -108,7 +121,7 @@ export const About = () => {
               <IoCloseOutline size={20} />
             </Button>
           </div>
-        </header >
+        </div >
         <Box spellCheck='false' autoFocus value={text} onChange={e => setText(e.target.value)} />
       </Container >
     </Draggable>
