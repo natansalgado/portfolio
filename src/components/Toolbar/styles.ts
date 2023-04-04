@@ -27,7 +27,7 @@ export const Button = styled.button`
   background: transparent;
   cursor: pointer;
 
-  div {
+  .is-open {
     position: absolute;
     bottom: 0;
 

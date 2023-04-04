@@ -16,6 +16,7 @@ export const Container = styled.div`
     background: #000a;
     padding: 5px 10px;
     border-radius: 5px;
+    text-align: center;
   }
 
   .fade-in-element {

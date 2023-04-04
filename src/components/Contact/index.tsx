@@ -2,16 +2,14 @@ import { useEffect, useRef, useState, KeyboardEvent } from 'react'
 import { Container, Button, Body, Header, Content, Footer } from './styles'
 import { IoCloseOutline, IoRemoveOutline } from 'react-icons/io5'
 import { TiTabsOutline } from 'react-icons/ti'
+import { MdCropSquare } from 'react-icons/md'
 import { BsGithub, BsLinkedin } from 'react-icons/bs'
 
 import Draggable, { DraggableData, DraggableEvent } from 'react-draggable'
 
-import { useDispatch } from 'react-redux'
-import { closeContact, activeContact } from '../../store/desktopSlice'
+import { useDispatch, useSelector } from 'react-redux'
+import { closeContact, activeContact, desktop } from '../../store/desktopSlice'
 
-import { useSelector } from 'react-redux'
-import { desktop } from '../../store/desktopSlice'
-import { MdCropSquare } from 'react-icons/md'
 
 interface Props {
   isDesktop: boolean

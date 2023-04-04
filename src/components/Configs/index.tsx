@@ -8,7 +8,8 @@ import { MdCropSquare } from 'react-icons/md'
 import Draggable, { DraggableData, DraggableEvent } from 'react-draggable'
 
 import { useDispatch, useSelector } from 'react-redux'
-import { closeAbout, activeAbout, desktop } from '../../store/desktopSlice'
+import { desktop, closeConfigs, activeConfigs } from '../../store/desktopSlice'
+import { BsPlusLg } from 'react-icons/bs'
 
 
 interface Props {
@@ -16,20 +17,7 @@ interface Props {
   windowSize: { width: number, height: number }
 }
 
-const defaultText = `Olá, meu nome é Natan Salgado,
-tenho 20 anos e sou desenvolvedor frontend.
-
-Minha primeira interação com programação aconteceu entre os meus 15 e os 16 anos.
-Aprendi o básico, mas logo deixei para lá...
-
-Entretanto, em junho de 2022, fui atraído novamente e desde então tenho me interessado cada vez mais pela área.
-
-Atualmente, domino mais a área do Frontend,
-mas tenho bastante interesse em aprender mais sobre Backend futuramente.
-
->`
-
-export const About = ({ isDesktop, windowSize }: Props) => {
+export const Configs = ({ isDesktop, windowSize }: Props) => {
   const [windowHeight, setWindowHeight] = useState(windowSize.height)
   const [windowWidth, setWindowWidth] = useState(windowSize.width)
 
@@ -44,20 +32,12 @@ export const About = ({ isDesktop, windowSize }: Props) => {
     y: isDesktop ? (windowHeight - ((80 / 100) * windowHeight)) / 2 - 25 : 0
   })
 
-
-  const write = (text: string, i = 0) => {
-    if (i < text.length) {
-      setText(text.slice(0, i + 1))
-      setTimeout(() => write(text, i + 1), 70)
-    }
-  }
-
   const handleClose = () => {
-    dispatch(closeAbout())
+    dispatch(closeConfigs())
   }
 
   const handleActived = () => {
-    dispatch(activeAbout())
+    dispatch(activeConfigs())
   }
 
   const handleFullScreen = () => {
@@ -77,10 +57,6 @@ export const About = ({ isDesktop, windowSize }: Props) => {
       setPosition({ x: data.x, y: data.y })
     }
   }
-
-  useEffect(() => {
-    setTimeout(() => write(defaultText), 1000)
-  }, [])
 
   useEffect(() => {
     setWindowHeight(windowSize.height)
@@ -107,12 +83,9 @@ export const About = ({ isDesktop, windowSize }: Props) => {
       onStop={handleOnStop}
       position={isDesktop ? position : { x: 0, y: 0 }}
     >
-      <Container onClick={handleActived} fullScreen={fullScreen} isDesktop={isDesktop} className={actived === 'about' ? 'actived' : ''}>
+      <Container onClick={handleActived} fullScreen={fullScreen} isDesktop={isDesktop} className={actived === 'configs' ? 'actived' : ''}>
         <div className='header' >
-          <div className='handle'>
-            <VscTerminalCmd size={16} />
-            <h1>sobre mim.cmd</h1>
-          </div>
+          <div className='handle' />
           <div>
             {isDesktop &&
               <>
@@ -133,7 +106,25 @@ export const About = ({ isDesktop, windowSize }: Props) => {
             </Button>
           </div>
         </div >
-        <Box spellCheck='false' autoFocus value={text} onChange={e => setText(e.target.value)} />
+        <Box >
+          <div className='header'>
+            <h1>SETTINGS</h1>
+          </div>
+          <div className='content'>
+            <label className='wallpaper'>
+              <p>PAPEL DE PAREDE</p>
+              <input type="file" accept='.jpg, jpeg, .png' />
+              <div>ESCOLHER</div>
+            </label>
+            <label className='color'>
+              <p>COR DA BARRA DE TAREFAS</p>
+              <input type='color' />
+            </label>
+            <div className='button'>
+              <button>SALVAR</button>
+            </div>
+          </div>
+        </Box>
       </Container >
     </Draggable>
   )

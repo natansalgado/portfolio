@@ -6,21 +6,28 @@ interface State {
   aboutOpen: boolean
   projectsOpen: boolean
   contactOpen: boolean
+  configsOpen: boolean
   project: number | null
   aboutIconPosition: { x: number, y: number }
   projectsIconPosition: { x: number, y: number }
   contactIconPosition: { x: number, y: number }
+  configsIconPosition: { x: number, y: number }
 }
 
 const initialState: State = {
   actived: 'none',
+
   aboutOpen: false,
   projectsOpen: false,
   contactOpen: false,
+  configsOpen: false,
+
   project: null,
+
   aboutIconPosition: { x: 0, y: 0 },
   projectsIconPosition: { x: 0, y: 100 },
-  contactIconPosition: { x: 0, y: 200 }
+  contactIconPosition: { x: 0, y: 200 },
+  configsIconPosition: { x: 0, y: 300 }
 }
 
 const slice = createSlice({
@@ -90,26 +97,58 @@ const slice = createSlice({
       return { ...state, actived: 'contact' }
     },
 
+    //CONFIGS
+    openConfigs: (state) => {
+      return { ...state, configsOpen: true, actived: 'configs' }
+    },
+    closeConfigs: (state) => {
+      return { ...state, configsOpen: false, actived: 'none' }
+    },
+    handleConfigs: (state) => {
+      if (state.configsOpen && !state.aboutOpen && !state.projectsOpen && !state.contactOpen) {
+        return { ...state, configsOpen: false, actived: 'none' }
+      }
+      if (state.configsOpen && state.actived !== 'configs') {
+        return { ...state, actived: 'configs' }
+      }
+      return { ...state, configsOpen: !state.configsOpen, actived: !state.configsOpen ? 'configs' : 'none' }
+    },
+    activeConfigs: (state) => {
+      return { ...state, actived: 'configs' }
+    },
+
+
     // ICONS POSITION
     setAboutIconPosition: (state, { payload }) => {
       const { x, y } = payload
       if (JSON.stringify(payload) !== JSON.stringify(state.projectsIconPosition) &&
-        JSON.stringify(payload) !== JSON.stringify(state.contactIconPosition)) {
+        JSON.stringify(payload) !== JSON.stringify(state.contactIconPosition) &&
+        JSON.stringify(payload) !== JSON.stringify(state.configsIconPosition)) {
         return { ...state, aboutIconPosition: { x, y } }
       }
     },
     setProjectsIconPosition: (state, { payload }) => {
       const { x, y } = payload
       if (JSON.stringify(payload) !== JSON.stringify(state.aboutIconPosition) &&
-        JSON.stringify(payload) !== JSON.stringify(state.contactIconPosition)) {
+        JSON.stringify(payload) !== JSON.stringify(state.contactIconPosition) &&
+        JSON.stringify(payload) !== JSON.stringify(state.configsIconPosition)) {
         return { ...state, projectsIconPosition: { x, y } }
       }
     },
     setContactIconPosition: (state, { payload }) => {
       const { x, y } = payload
       if (JSON.stringify(payload) !== JSON.stringify(state.aboutIconPosition) &&
-        JSON.stringify(payload) !== JSON.stringify(state.projectsIconPosition)) {
+        JSON.stringify(payload) !== JSON.stringify(state.projectsIconPosition) &&
+        JSON.stringify(payload) !== JSON.stringify(state.configsIconPosition)) {
         return { ...state, contactIconPosition: { x, y } }
+      }
+    },
+    setConfigsIconPosition: (state, { payload }) => {
+      const { x, y } = payload
+      if (JSON.stringify(payload) !== JSON.stringify(state.aboutIconPosition) &&
+        JSON.stringify(payload) !== JSON.stringify(state.projectsIconPosition) &&
+        JSON.stringify(payload) !== JSON.stringify(state.contactIconPosition)) {
+        return { ...state, configsIconPosition: { x, y } }
       }
     }
   }
@@ -119,6 +158,7 @@ export const {
   openAbout, closeAbout, handleAbout, activeAbout,
   openProjects, closeProjects, handleProjects, activeProjects, setProject,
   openContact, closeContact, handleContact, activeContact,
+  openConfigs, closeConfigs, setConfigsIconPosition, handleConfigs, activeConfigs,
   setAboutIconPosition, setProjectsIconPosition, setContactIconPosition
 } = slice.actions
 

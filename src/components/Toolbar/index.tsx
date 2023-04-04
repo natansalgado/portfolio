@@ -1,53 +1,53 @@
 import { Button, Container } from './styles'
 import { HiCommandLine } from 'react-icons/hi2'
-import { BsDiscord } from 'react-icons/bs'
-import { BsWhatsapp } from 'react-icons/bs'
+import { BsDiscord, BsWhatsapp, BsGear } from 'react-icons/bs'
 
-import { useDispatch } from 'react-redux'
-import { handleAbout, handleContact, handleProjects } from '../../store/desktopSlice'
-
-import { useSelector } from 'react-redux'
-import { desktop } from '../../store/desktopSlice'
+import { useDispatch, useSelector } from 'react-redux'
+import { handleAbout, handleContact, handleProjects, handleConfigs, desktop } from '../../store/desktopSlice'
 
 export const Toolbar = () => {
-  const { aboutOpen, projectsOpen, contactOpen } = useSelector(desktop)
+  const { aboutOpen, projectsOpen, contactOpen, configsOpen } = useSelector(desktop)
   const dispatch = useDispatch()
 
-  const aboutHandler = () => {
-    dispatch(handleAbout())
+  const openAbout = () => {
+    return dispatch(handleAbout())
   }
 
-  const projectsHandler = () => {
-    dispatch(handleProjects())
+  const openProjects = () => {
+    return dispatch(handleProjects())
   }
 
-  const contactHandler = () => {
-    dispatch(handleContact())
+  const openContact = () => {
+    return dispatch(handleContact())
+  }
+
+  const openConfigs = () => {
+    return dispatch(handleConfigs())
   }
 
   return (
     <Container>
       <nav>
-        <Button onClick={aboutHandler}>
+        <Button onClick={openAbout}>
           <HiCommandLine size={30} />
-          {aboutOpen &&
-            <div />
-          }
+          {aboutOpen && <div className='is-open' />}
         </Button>
 
-        <Button onClick={projectsHandler}>
+        <Button onClick={openProjects}>
           <BsDiscord size={30} />
-          {projectsOpen &&
-            <div />
-          }
+          {projectsOpen && <div className='is-open' />}
         </Button>
 
-        <Button onClick={contactHandler}>
+        <Button onClick={openContact}>
           <BsWhatsapp size={26} />
-          {contactOpen &&
-            <div />
-          }
+          {contactOpen && <div className='is-open' />}
         </Button>
+
+        <Button onClick={openConfigs}>
+          <BsGear size={26} />
+          {configsOpen && <div className='is-open' />}
+        </Button>
+
       </nav>
     </Container>
   )

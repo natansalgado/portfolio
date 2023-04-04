@@ -38,7 +38,7 @@ export const projects = [
   {
     title: 'em breve...',
     description: 'Projeto ainda não terminado.',
-    image: 'https://archive.org/download/discordprofilepictures//discordred_thumb.jpg',
+    image: 'https://cdn.discordapp.com/embed/avatars/1.png',
     images: [],
     techs: [],
     on: false,
