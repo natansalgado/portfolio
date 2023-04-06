@@ -78,16 +78,17 @@ export const Box = styled.div`
   }
 
   .content {
-    padding: 10px;
     width: fit-content;
+    width: 100%;
 
     label{
       display: flex;
+      justify-content: space-around;
       align-items: center;
-      justify-content: space-between;
       gap: 20px;
+      border-bottom: 1px #fff1 solid;
 
-      padding: 5px;
+      padding: 15px 5px;
 
       p {
         font-size: 14px;
@@ -135,27 +136,5 @@ export const Box = styled.div`
 
       }
     }
-
-    .button {
-      width: 100%;
-      text-align: end;
-      padding: 5px;
-      
-      button {
-        padding: 10px;
-        background: #fff2;
-        outline: none;
-        border: none;
-        font-size: 14px;
-        cursor: pointer;
-        text-align: center;
-
-        &:hover {
-          outline: 2px #fff2 solid;
-          outline-offset: -2px;
-        }
-      }
-    }
   }
-
 `

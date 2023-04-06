@@ -5,8 +5,8 @@ import { BsDiscord, BsWhatsapp, BsGear } from 'react-icons/bs'
 import { useDispatch, useSelector } from 'react-redux'
 import { handleAbout, handleContact, handleProjects, handleConfigs, desktop } from '../../store/desktopSlice'
 
-export const Toolbar = () => {
-  const { aboutOpen, projectsOpen, contactOpen, configsOpen } = useSelector(desktop)
+export const Taskbar = () => {
+  const { aboutOpen, projectsOpen, contactOpen, configsOpen, taskbarColor } = useSelector(desktop)
   const dispatch = useDispatch()
 
   const openAbout = () => {
@@ -26,7 +26,7 @@ export const Toolbar = () => {
   }
 
   return (
-    <Container>
+    <Container taskbarColor={taskbarColor}>
       <nav>
         <Button onClick={openAbout}>
           <HiCommandLine size={30} />

@@ -1,23 +1,22 @@
-import { useEffect, useState } from 'react'
+import { ChangeEvent, useEffect, useState } from 'react'
 import { Container, Button, Box } from './styles'
 import { IoCloseOutline, IoRemoveOutline } from 'react-icons/io5'
-import { VscTerminalCmd } from 'react-icons/vsc'
 import { TiTabsOutline } from 'react-icons/ti'
 import { MdCropSquare } from 'react-icons/md'
 
 import Draggable, { DraggableData, DraggableEvent } from 'react-draggable'
 
 import { useDispatch, useSelector } from 'react-redux'
-import { desktop, closeConfigs, activeConfigs } from '../../store/desktopSlice'
-import { BsPlusLg } from 'react-icons/bs'
+import { desktop, closeConfigs, activeConfigs, changeTaskbarColor } from '../../store/desktopSlice'
 
 
 interface Props {
   isDesktop: boolean
   windowSize: { width: number, height: number }
+  setWallpaper: (wallpaper: any) => void
 }
 
-export const Configs = ({ isDesktop, windowSize }: Props) => {
+export const Configs = ({ isDesktop, windowSize, setWallpaper }: Props) => {
   const [windowHeight, setWindowHeight] = useState(windowSize.height)
   const [windowWidth, setWindowWidth] = useState(windowSize.width)
 
@@ -25,12 +24,30 @@ export const Configs = ({ isDesktop, windowSize }: Props) => {
 
   const dispatch = useDispatch()
 
-  const [text, setText] = useState('')
   const [fullScreen, setFullScreen] = useState(false)
   const [position, setPosition] = useState({
     x: isDesktop ? (windowWidth - ((80 / 100) * windowWidth)) / 2 : 0,
     y: isDesktop ? (windowHeight - ((80 / 100) * windowHeight)) / 2 - 25 : 0
   })
+
+  const [color, setColor] = useState('#000000')
+  const [canChange, setCanChange] = useState(true)
+
+  const handleChangeColor = (e: ChangeEvent<HTMLInputElement>) => {
+    setColor(e.target.value)
+    if (canChange) {
+      setCanChange(false)
+      dispatch(changeTaskbarColor(e.target.value))
+      setTimeout(() => {
+        setCanChange(true)
+      }, 100)
+    }
+  }
+
+  const handleWallpaper = (e: ChangeEvent<HTMLInputElement>) => {
+    const selectedFile = e.target.files?.[0]
+    setWallpaper(selectedFile)
+  }
 
   const handleClose = () => {
     dispatch(closeConfigs())
@@ -108,21 +125,18 @@ export const Configs = ({ isDesktop, windowSize }: Props) => {
         </div >
         <Box >
           <div className='header'>
-            <h1>SETTINGS</h1>
+            <h1>CONFIGURAÇÕES</h1>
           </div>
           <div className='content'>
             <label className='wallpaper'>
               <p>PAPEL DE PAREDE</p>
-              <input type="file" accept='.jpg, jpeg, .png' />
+              <input type="file" accept='.jpg, jpeg, .png' onChange={handleWallpaper} />
               <div>ESCOLHER</div>
             </label>
             <label className='color'>
               <p>COR DA BARRA DE TAREFAS</p>
-              <input type='color' />
+              <input type='color' value={color} onChange={handleChangeColor} />
             </label>
-            <div className='button'>
-              <button>SALVAR</button>
-            </div>
           </div>
         </Box>
       </Container >

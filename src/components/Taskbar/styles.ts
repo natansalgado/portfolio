@@ -1,13 +1,17 @@
 import styled from 'styled-components'
 
-export const Container = styled.div`
+interface Props {
+  taskbarColor: string | null
+}
+
+export const Container = styled.div<Props>`
   position: fixed;
   z-index: 1;
   bottom: 0;
 
   height: 50px;
   width: 100%;
-  background-color: #0008;
+  background-color: ${({ taskbarColor }) => taskbarColor ? taskbarColor + '80' : '#0008'};
 
   nav {
     display: flex;

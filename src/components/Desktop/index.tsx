@@ -20,6 +20,11 @@ export const Desktop = () => {
   const [isDesktop, setIsDesktop] = useState(windowSize.width >= 720 ? true : false)
   const [message, setMessage] = useState(false)
   const [showMessage, setShowMessage] = useState(windowSize.width >= 720 ? true : false)
+  const [wallpaper, setWallpaper] = useState(null)
+
+  const handleWallpaper = (wallpaper: any) => {
+    setWallpaper(wallpaper)
+  }
 
   useEffect(() => {
     isDesktop && setMessage(true)
@@ -47,6 +52,10 @@ export const Desktop = () => {
 
   return (
     <Container>
+      {wallpaper &&
+        <img className='wallpaper-img' src={URL.createObjectURL(wallpaper)} alt="" />
+      }
+
       {isDesktop &&
         <>
           <AboutIcon />
@@ -59,11 +68,12 @@ export const Desktop = () => {
       {aboutOpen && <About isDesktop={isDesktop} windowSize={windowSize} />}
       {projectsOpen && <Projects isDesktop={isDesktop} windowSize={windowSize} />}
       {contactOpen && <Contact isDesktop={isDesktop} windowSize={windowSize} />}
-      {configsOpen && <Configs isDesktop={isDesktop} windowSize={windowSize} />}
+      {configsOpen && <Configs isDesktop={isDesktop} windowSize={windowSize} setWallpaper={handleWallpaper} />}
 
       {showMessage &&
         <span className={message ? 'fade-in-element show' : 'fade-in-element'} >PRESSIONE F11 PARA UMA MELHOR EXPERIÊNCIA</span>
       }
+
     </Container>
   )
 }

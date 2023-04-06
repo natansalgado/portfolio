@@ -8,6 +8,7 @@ interface State {
   contactOpen: boolean
   configsOpen: boolean
   project: number | null
+  taskbarColor: string | null
   aboutIconPosition: { x: number, y: number }
   projectsIconPosition: { x: number, y: number }
   contactIconPosition: { x: number, y: number }
@@ -23,6 +24,7 @@ const initialState: State = {
   configsOpen: false,
 
   project: null,
+  taskbarColor: null,
 
   aboutIconPosition: { x: 0, y: 0 },
   projectsIconPosition: { x: 0, y: 100 },
@@ -116,6 +118,9 @@ const slice = createSlice({
     activeConfigs: (state) => {
       return { ...state, actived: 'configs' }
     },
+    changeTaskbarColor: (state, { payload }) => {
+      return { ...state, taskbarColor: payload }
+    },
 
 
     // ICONS POSITION
@@ -158,7 +163,7 @@ export const {
   openAbout, closeAbout, handleAbout, activeAbout,
   openProjects, closeProjects, handleProjects, activeProjects, setProject,
   openContact, closeContact, handleContact, activeContact,
-  openConfigs, closeConfigs, setConfigsIconPosition, handleConfigs, activeConfigs,
+  openConfigs, closeConfigs, setConfigsIconPosition, handleConfigs, activeConfigs, changeTaskbarColor,
   setAboutIconPosition, setProjectsIconPosition, setContactIconPosition
 } = slice.actions
 

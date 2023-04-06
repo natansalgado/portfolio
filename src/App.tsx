@@ -1,5 +1,5 @@
 import GlobalStyle from './styles/global'
-import { Toolbar } from './components/Toolbar'
+import { Taskbar } from './components/Taskbar'
 import { Desktop } from './components/Desktop'
 
 function App() {
@@ -8,7 +8,7 @@ function App() {
   return (
     <div className="App">
       <Desktop />
-      <Toolbar />
+      <Taskbar />
       <GlobalStyle />
     </div>
   )
