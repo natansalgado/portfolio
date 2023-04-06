@@ -1,12 +1,12 @@
 import { Button, Container } from './styles'
 import { HiCommandLine } from 'react-icons/hi2'
-import { BsDiscord, BsWhatsapp, BsGear } from 'react-icons/bs'
+import { BsDiscord, BsWhatsapp, BsGear, BsInfoCircleFill } from 'react-icons/bs'
 
 import { useDispatch, useSelector } from 'react-redux'
-import { handleAbout, handleContact, handleProjects, handleConfigs, desktop } from '../../store/desktopSlice'
+import { handleAbout, handleContact, handleProjects, handleConfigs, desktop, handleInfos } from '../../store/desktopSlice'
 
 export const Taskbar = () => {
-  const { aboutOpen, projectsOpen, contactOpen, configsOpen, taskbarColor } = useSelector(desktop)
+  const { aboutOpen, projectsOpen, contactOpen, configsOpen, infosOpen, taskbarColor } = useSelector(desktop)
   const dispatch = useDispatch()
 
   const openAbout = () => {
@@ -23,6 +23,10 @@ export const Taskbar = () => {
 
   const openConfigs = () => {
     return dispatch(handleConfigs())
+  }
+
+  const openInfos = () => {
+    return dispatch(handleInfos())
   }
 
   return (
@@ -46,6 +50,11 @@ export const Taskbar = () => {
         <Button onClick={openConfigs}>
           <BsGear size={26} />
           {configsOpen && <div className='is-open' />}
+        </Button>
+
+        <Button onClick={openInfos}>
+          <BsInfoCircleFill size={26} />
+          {infosOpen && <div className='is-open' />}
         </Button>
 
       </nav>

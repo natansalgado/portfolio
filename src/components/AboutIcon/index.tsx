@@ -33,7 +33,7 @@ export const AboutIcon = () => {
     >
       <Container className="handle" onClick={openHandler} >
         <HiCommandLine size={40} />
-        <h1>sobre mim.cmd</h1>
+        <h1>sobre mim</h1>
       </Container>
     </Draggable>
   )

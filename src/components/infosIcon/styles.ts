@@ -18,7 +18,9 @@ export const Container = styled.button`
     border: #fff2 1px solid;
   }
 
-  
+  svg {
+    margin-bottom: 5px;
+  }
 
   h1 {
     font-weight: 300;

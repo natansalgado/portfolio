@@ -14,7 +14,7 @@ export const Container = styled.div`
     object-fit: cover;
   }
 
-  span {
+  .fade-in-element {
     font-size: 20px;
     position: absolute;
     top: 10px;
@@ -25,9 +25,7 @@ export const Container = styled.div`
     padding: 5px 10px;
     border-radius: 5px;
     text-align: center;
-  }
 
-  .fade-in-element {
     opacity: 0;
     transition: opacity 1.5s ease-in-out;
   }

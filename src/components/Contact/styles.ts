@@ -4,7 +4,6 @@ interface Props {
   isDesktop?: boolean
   fullScreen?: boolean
   color?: string
-  projectOn?: boolean
 }
 
 export const Container = styled.div<Props>`
@@ -15,7 +14,7 @@ export const Container = styled.div<Props>`
   background: #075e54;
 
   height: ${({ isDesktop, fullScreen }) => isDesktop ? fullScreen ? 'calc(100% - 50px)' : '80vh' : 'calc(100% - 50px)'};
-  width: ${({ isDesktop, fullScreen }) => isDesktop ? fullScreen ? '100vw' : '80vw' : '100%'};
+  width: ${({ isDesktop, fullScreen }) => isDesktop ? fullScreen ? '100%' : '80vw' : '100%'};
 
   .header {
     display: flex;

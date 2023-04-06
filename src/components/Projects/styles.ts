@@ -9,7 +9,7 @@ interface Props {
 
 export const Container = styled.div<Props>`
   height: ${({ isDesktop, fullScreen }) => isDesktop ? fullScreen ? 'calc(100% - 80px)' : '80vh' : 'calc(100% - 80px)'};
-  width: ${({ isDesktop, fullScreen }) => isDesktop ? fullScreen ? '100vw' : '80vw' : '100%'};
+  width: ${({ isDesktop, fullScreen }) => isDesktop ? fullScreen ? '100%' : '80vw' : '100%'};
 
   .header {
     display: flex;

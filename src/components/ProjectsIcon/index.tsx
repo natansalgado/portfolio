@@ -33,7 +33,7 @@ export const ProjectsIcon = () => {
     >
       <Container className="handle" onClick={openHandler}>
         <BsDiscord size={40} />
-        <h1>meus projetos.dsc</h1>
+        <h1>meus projetos</h1>
       </Container>
     </Draggable>
   )

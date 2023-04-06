@@ -4,18 +4,20 @@ import { AboutIcon } from '../AboutIcon'
 import { ProjectsIcon } from '../ProjectsIcon'
 import { ContactIcon } from '../ContactIcon'
 import { ConfigsIcon } from '../ConfigsIcon'
+import { InfosIcon } from '../infosIcon'
 
 import { About } from '../About'
 import { Projects } from '../Projects'
 import { Contact } from '../Contact'
+import { Configs } from '../Configs'
+import { Infos } from '../Infos'
 
 import { useSelector } from 'react-redux'
 import { desktop } from '../../store/desktopSlice'
 import { useEffect, useState } from 'react'
-import { Configs } from '../Configs'
 
 export const Desktop = () => {
-  const { aboutOpen, projectsOpen, contactOpen, configsOpen } = useSelector(desktop)
+  const { aboutOpen, projectsOpen, contactOpen, configsOpen, infosOpen } = useSelector(desktop)
   const [windowSize, setWindowSize] = useState({ width: window.innerWidth, height: window.innerHeight })
   const [isDesktop, setIsDesktop] = useState(windowSize.width >= 720 ? true : false)
   const [message, setMessage] = useState(false)
@@ -53,7 +55,7 @@ export const Desktop = () => {
   return (
     <Container>
       {wallpaper &&
-        <img className='wallpaper-img' src={URL.createObjectURL(wallpaper)} alt="" />
+        <img draggable={false} className='wallpaper-img' src={URL.createObjectURL(wallpaper)} alt="" />
       }
 
       {isDesktop &&
@@ -62,6 +64,7 @@ export const Desktop = () => {
           <ProjectsIcon />
           <ContactIcon />
           <ConfigsIcon />
+          <InfosIcon />
         </>
       }
 
@@ -69,6 +72,7 @@ export const Desktop = () => {
       {projectsOpen && <Projects isDesktop={isDesktop} windowSize={windowSize} />}
       {contactOpen && <Contact isDesktop={isDesktop} windowSize={windowSize} />}
       {configsOpen && <Configs isDesktop={isDesktop} windowSize={windowSize} setWallpaper={handleWallpaper} />}
+      {infosOpen && <Infos isDesktop={isDesktop} windowSize={windowSize} />}
 
       {showMessage &&
         <span className={message ? 'fade-in-element show' : 'fade-in-element'} >PRESSIONE F11 PARA UMA MELHOR EXPERIÊNCIA</span>

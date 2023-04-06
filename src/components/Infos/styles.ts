@@ -55,72 +55,68 @@ export const Button = styled.button<Props>`
 export const Box = styled.div`
   height: 100%;
   background: #1a1a1a;
+  overflow-y: auto;
 
-  .header {
-    height: 50px;
-    padding: 10px;
-    border-bottom: 1px #fff4 solid;
-    
-    h1 {
-      font-size: 24px;
+  .header-2 {
+    padding: 20px 10px;
+
+    p {
+      font-size: 20px;
       font-weight: 300;
     }
   }
 
   .content {
-    width: 100%;
-
-    label {
+    div {
       display: flex;
-      justify-content: space-around;
-      align-items: center;
-      gap: 20px;
-      border-bottom: 1px #fff1 solid;
-
-      padding: 15px 5px;
-
+      flex-direction: column;
+      gap: 5px;
+      
+      margin-bottom: 25px;
+      font-weight: 300;
+      
       p {
+        width: 100%;
+        padding: 5px 10px;
         font-size: 14px;
-      }
-    }
-
-    .wallpaper {
-      input[type='file'] {
-        display: none;
+        border-bottom: 1px #fff1 solid;
       }
 
-      div {
-        font-size: 14px;
-        padding: 10px;
-        width: fit-content;
-        background: #fff2;
+      ul {
+        li {
+          font-size: 12px;
+          font-weight: 300;
+          margin-left: 30px;
+          margin-top: 5px;
 
-        cursor: pointer;
-
-        &:hover {
-          outline: 2px #fff2 solid;
-          outline-offset: -2px;
+          list-style-type: square;
         }
       }
-    }
 
-    .color {
-      input[type='color'] {
-        height: 40px;
-        width: 40px;
-        background: none;
-        outline: none;
-        border: none;
-        cursor: pointer;
+      .tecnologies {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: start;
+        flex-wrap: wrap;
 
-        &::-webkit-color-swatch {
-          border: transparent;
+        padding: 0 10px;
 
-          &:hover {
-            border: 2px #fff3 solid;
-          } 
+        p {
+          padding: 5px 0;
+          border-bottom: none;
+          font-size: 12px;
+          width: max-content;
         }
 
+        span {
+          font-size: 14px;
+          background: #005588;
+          width: fit-content;
+          padding: 2px 5px;
+          border-radius: 5px;
+          font-weight: 500;
+        }
       }
     }
   }

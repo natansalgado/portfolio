@@ -7,12 +7,14 @@ interface State {
   projectsOpen: boolean
   contactOpen: boolean
   configsOpen: boolean
+  infosOpen: boolean
   project: number | null
   taskbarColor: string | null
   aboutIconPosition: { x: number, y: number }
   projectsIconPosition: { x: number, y: number }
   contactIconPosition: { x: number, y: number }
   configsIconPosition: { x: number, y: number }
+  infosIconPosition: { x: number, y: number }
 }
 
 const initialState: State = {
@@ -22,6 +24,7 @@ const initialState: State = {
   projectsOpen: false,
   contactOpen: false,
   configsOpen: false,
+  infosOpen: false,
 
   project: null,
   taskbarColor: null,
@@ -29,7 +32,8 @@ const initialState: State = {
   aboutIconPosition: { x: 0, y: 0 },
   projectsIconPosition: { x: 0, y: 100 },
   contactIconPosition: { x: 0, y: 200 },
-  configsIconPosition: { x: 0, y: 300 }
+  configsIconPosition: { x: 0, y: 300 },
+  infosIconPosition: { x: 0, y: 400 }
 }
 
 const slice = createSlice({
@@ -44,7 +48,7 @@ const slice = createSlice({
       return { ...state, aboutOpen: false, actived: 'none' }
     },
     handleAbout: (state) => {
-      if (state.aboutOpen && !state.projectsOpen && !state.contactOpen) {
+      if (state.aboutOpen && !state.projectsOpen && !state.contactOpen && !state.configsOpen && !state.infosOpen) {
         return { ...state, aboutOpen: false, actived: 'none' }
       }
       if (state.aboutOpen && state.actived !== 'about') {
@@ -64,7 +68,7 @@ const slice = createSlice({
       return { ...state, projectsOpen: false, actived: 'none' }
     },
     handleProjects: (state) => {
-      if (state.projectsOpen && !state.aboutOpen && !state.contactOpen) {
+      if (state.projectsOpen && !state.aboutOpen && !state.contactOpen && !state.configsOpen && !state.infosOpen) {
         return { ...state, projectsOpen: false, actived: 'none' }
       }
       if (state.projectsOpen && state.actived !== 'projects') {
@@ -87,7 +91,7 @@ const slice = createSlice({
       return { ...state, contactOpen: false, actived: 'none' }
     },
     handleContact: (state) => {
-      if (state.contactOpen && !state.aboutOpen && !state.projectsOpen) {
+      if (state.contactOpen && !state.aboutOpen && !state.projectsOpen && !state.configsOpen && !state.infosOpen) {
         return { ...state, contactOpen: false, actived: 'none' }
       }
       if (state.contactOpen && state.actived !== 'contact') {
@@ -107,7 +111,7 @@ const slice = createSlice({
       return { ...state, configsOpen: false, actived: 'none' }
     },
     handleConfigs: (state) => {
-      if (state.configsOpen && !state.aboutOpen && !state.projectsOpen && !state.contactOpen) {
+      if (state.configsOpen && !state.aboutOpen && !state.projectsOpen && !state.contactOpen && !state.infosOpen) {
         return { ...state, configsOpen: false, actived: 'none' }
       }
       if (state.configsOpen && state.actived !== 'configs') {
@@ -122,13 +126,33 @@ const slice = createSlice({
       return { ...state, taskbarColor: payload }
     },
 
+    // INFOS
+    openInfos: (state) => {
+      return { ...state, infosOpen: true, actived: 'infos' }
+    },
+    closeInfos: (state) => {
+      return { ...state, infosOpen: false, actived: 'none' }
+    },
+    handleInfos: (state) => {
+      if (state.infosOpen && !state.aboutOpen && !state.projectsOpen && !state.contactOpen && !state.configsOpen) {
+        return { ...state, infosOpen: false, actived: 'none' }
+      }
+      if (state.infosOpen && state.actived !== 'infos') {
+        return { ...state, actived: 'infos' }
+      }
+      return { ...state, infosOpen: !state.infosOpen, actived: !state.infosOpen ? 'infos' : 'none' }
+    },
+    activeInfos: (state) => {
+      return { ...state, actived: 'infos' }
+    },
 
     // ICONS POSITION
     setAboutIconPosition: (state, { payload }) => {
       const { x, y } = payload
       if (JSON.stringify(payload) !== JSON.stringify(state.projectsIconPosition) &&
         JSON.stringify(payload) !== JSON.stringify(state.contactIconPosition) &&
-        JSON.stringify(payload) !== JSON.stringify(state.configsIconPosition)) {
+        JSON.stringify(payload) !== JSON.stringify(state.configsIconPosition) &&
+        JSON.stringify(payload) !== JSON.stringify(state.infosIconPosition)) {
         return { ...state, aboutIconPosition: { x, y } }
       }
     },
@@ -136,7 +160,8 @@ const slice = createSlice({
       const { x, y } = payload
       if (JSON.stringify(payload) !== JSON.stringify(state.aboutIconPosition) &&
         JSON.stringify(payload) !== JSON.stringify(state.contactIconPosition) &&
-        JSON.stringify(payload) !== JSON.stringify(state.configsIconPosition)) {
+        JSON.stringify(payload) !== JSON.stringify(state.configsIconPosition) &&
+        JSON.stringify(payload) !== JSON.stringify(state.infosIconPosition)) {
         return { ...state, projectsIconPosition: { x, y } }
       }
     },
@@ -144,7 +169,8 @@ const slice = createSlice({
       const { x, y } = payload
       if (JSON.stringify(payload) !== JSON.stringify(state.aboutIconPosition) &&
         JSON.stringify(payload) !== JSON.stringify(state.projectsIconPosition) &&
-        JSON.stringify(payload) !== JSON.stringify(state.configsIconPosition)) {
+        JSON.stringify(payload) !== JSON.stringify(state.configsIconPosition) &&
+        JSON.stringify(payload) !== JSON.stringify(state.infosIconPosition)) {
         return { ...state, contactIconPosition: { x, y } }
       }
     },
@@ -152,8 +178,18 @@ const slice = createSlice({
       const { x, y } = payload
       if (JSON.stringify(payload) !== JSON.stringify(state.aboutIconPosition) &&
         JSON.stringify(payload) !== JSON.stringify(state.projectsIconPosition) &&
-        JSON.stringify(payload) !== JSON.stringify(state.contactIconPosition)) {
+        JSON.stringify(payload) !== JSON.stringify(state.contactIconPosition) &&
+        JSON.stringify(payload) !== JSON.stringify(state.infosIconPosition)) {
         return { ...state, configsIconPosition: { x, y } }
+      }
+    },
+    setInfosIconPosition: (state, { payload }) => {
+      const { x, y } = payload
+      if (JSON.stringify(payload) !== JSON.stringify(state.aboutIconPosition) &&
+        JSON.stringify(payload) !== JSON.stringify(state.projectsIconPosition) &&
+        JSON.stringify(payload) !== JSON.stringify(state.contactIconPosition) &&
+        JSON.stringify(payload) !== JSON.stringify(state.configsIconPosition)) {
+        return { ...state, infosIconPosition: { x, y } }
       }
     }
   }
@@ -164,7 +200,8 @@ export const {
   openProjects, closeProjects, handleProjects, activeProjects, setProject,
   openContact, closeContact, handleContact, activeContact,
   openConfigs, closeConfigs, setConfigsIconPosition, handleConfigs, activeConfigs, changeTaskbarColor,
-  setAboutIconPosition, setProjectsIconPosition, setContactIconPosition
+  openInfos, closeInfos, handleInfos, activeInfos,
+  setAboutIconPosition, setProjectsIconPosition, setContactIconPosition, setInfosIconPosition
 } = slice.actions
 
 export const desktop = (state: RootState) => state.desktop
