@@ -56,10 +56,9 @@ export const Box = styled.div`
   height: 100%;
   background: #1a1a1a;
 
-  .header {
+  .header-2 {
     height: 50px;
     padding: 10px;
-    border-bottom: 1px #fff4 solid;
     
     h1 {
       font-size: 24px;

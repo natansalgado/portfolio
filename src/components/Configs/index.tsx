@@ -124,7 +124,7 @@ export const Configs = ({ isDesktop, windowSize, setWallpaper }: Props) => {
           </div>
         </div >
         <Box >
-          <div className='header'>
+          <div className='header-2'>
             <h1>CONFIGURAÇÕES</h1>
           </div>
           <div className='content'>

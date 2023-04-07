@@ -138,7 +138,6 @@ export const Content = styled.div`
 
   background: #36393e;
   width: 100%;
-  overflow: hidden;
   
   .header {
     background: transparent;
@@ -314,23 +313,20 @@ export const Project = styled.button<Props>`
 `
 
 export const Footer = styled.div`
-  height: 50px;
   background: transparent;
-  padding: 0 30px 0 10px;
-  margin-bottom: 10px;
+  padding: 0 10px 10px 10px;
 
   @media (max-width: 600px) {
-      padding: 10px 10px 10px 5px;
+      padding: 0px 5px 10px 5px;
     }
 
   input {
-    height: 40px;
     width: 100%;
     background: #36393e;
     filter: brightness(1.3);
     border: none;
     outline: none;
-    padding: 0 15px;
+    padding: 10px 15px;
     border-radius: 10px;
     font-weight: 300;
     font-size: 16px

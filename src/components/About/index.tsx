@@ -24,8 +24,9 @@ Aprendi o básico, mas logo deixei para lá...
 
 Entretanto, em junho de 2022, fui atraído novamente e desde então tenho me interessado cada vez mais pela área.
 
-Atualmente, domino mais a área do Frontend,
-mas tenho bastante interesse em aprender mais sobre Backend futuramente.
+Atualmente, domino mais a área de Frontend com React. Tenho um conhecimento bem básico sobre Backend com Node e SQL, que ainda pretendo melhorar.
+
+As linguagens que pretendo aprender no futuro são: Python, C#, C++ e Go.
 
 >`
 
@@ -48,7 +49,7 @@ export const About = ({ isDesktop, windowSize }: Props) => {
   const write = (text: string, i = 0) => {
     if (i < text.length) {
       setText(text.slice(0, i + 1))
-      setTimeout(() => write(text, i + 1), 70)
+      setTimeout(() => write(text, i + 1), 50)
     }
   }
 

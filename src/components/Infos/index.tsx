@@ -121,7 +121,7 @@ export const Infos = ({ isDesktop, windowSize }: Props) => {
             <div className='taskbar'>
               <p>BARRA DE TAREFAS</p>
               <ul>
-                <li>AO CLICAR EM UM ATALHO, ABRE-SE UMA JANELA.</li>
+                <li>AO CLICAR EM UM DOS ATALHOS, ABRE-SE UMA JANELA.</li>
                 <li>APARECE UM INDICADOR CASO A JANELA ESTEJA ABERTA.</li>
                 <li>CASO A JANELA ESTIVER ABERTA EM SEGUNDO PLANO, AO CLICAR NO ATALHO, ELA SE MOVERÁ PARA O PRIMEIRO PLANO.</li>
                 <li>QUANDO A JANELA ESTIVER ABERTA EM PRIMEIRO PLANO OU SÓ ESTIVER ELA ABERTA, SERÁ FECHADA AO CLICAR NO ATALHO.</li>
