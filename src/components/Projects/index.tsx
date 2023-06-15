@@ -155,7 +155,7 @@ export const Projects = ({ isDesktop, windowSize }: Props) => {
                   <h1>{projects[project].title}</h1>
                 </div>
                 <div ref={scrollRef} className='body'>
-                  {project < 3 &&
+                  {project < projects.length - 1 &&
                     <div className='section first'>imagens de exemplo</div>
                   }
                   {projects[project].images.map((image, index) =>
