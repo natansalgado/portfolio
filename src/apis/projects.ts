@@ -1,5 +1,21 @@
 export const projects = [
   {
+    title: 'Kasinão',
+    description: 'O Kasinão é um cassino online exclusivamente voltado para diversão e entretenimento. Ao contrário de outros cassinos online, não é necessário utilizar dinheiro real para jogar. Isso significa que você pode desfrutar de todos os jogos oferecidos sem correr o risco de perder dinheiro de verdade. Os jogos foram baseados em alguns cassinos online populares, mas com uma estilização diferenciada.',
+    image: 'https://github.com/natansalgado/kasinao/assets/118204748/f9374139-8e76-4bd4-8eb5-fb1ad6a86f69',
+    images: [
+      'https://github.com/natansalgado/kasinao/assets/118204748/aa866b20-9760-4061-b256-8482e192c2b5',
+      'https://github.com/natansalgado/kasinao/assets/118204748/572d5db4-ec65-4b94-8d0c-59c5fac7b0e2',
+      'https://github.com/natansalgado/kasinao/assets/118204748/07872aa8-6567-4115-ab34-f252c7264e24',
+      'https://github.com/natansalgado/kasinao/assets/118204748/a95ac5b4-5485-4496-b543-9cbaf94c1967',
+      'https://github.com/natansalgado/kasinao/assets/118204748/4ff2dd11-8341-45ab-b747-486d2729b4b6'
+    ],
+    techs: ['react', 'vite', 'typescript', 'html', 'react-redux', 'react-icons', 'styled-components', 'git & github'],
+    on: true,
+    repo: 'https://github.com/natansalgado/kasinao',
+    test: 'https://natansalgado.github.io/kasinao/'
+  },
+  {
     title: 'todo list',
     description: 'Uma todo list responsiva que inclui um sistema de adição, exclusão, edição e drag and drop. Além disso, é possível alterar o tema de cores.',
     image: 'https://user-images.githubusercontent.com/118204748/228327496-448934f4-d325-4e24-a60e-59eba98bc3ab.png',
@@ -19,7 +35,7 @@ export const projects = [
   {
     title: 'crow',
     description: 'Este foi meu primeiro projeto utilizando React. É basicamente uma rede social baseada no Twitter, onde é possível postar texto, imagens, curtir posts e comentar com texto ou imagens. Também possui um sistema simples de registro no qual o usuário deve escolher um nome e uma foto de perfil.',
-    image: 'https://camo.githubusercontent.com/e9b97b4ebde61310ac92c49821de267f536b4b592c3d493b7a1ce21865eda4a4/68747470733a2f2f63646e2e646973636f72646170702e636f6d2f6174746163686d656e74732f3836343532393932313434373639303234322f313038303533303635393532323635383430372f63726f772d73637265656e73686f742e706e67',
+    image: 'https://github.com/natansalgado/crow/assets/118204748/0c2ee07e-4872-4366-819f-37892302df04',
     images: [
       'https://user-images.githubusercontent.com/118204748/229313055-324e93e4-0566-4a11-9636-b01ed86e3833.gif',
       'https://user-images.githubusercontent.com/118204748/229313099-8cea4b6d-31f2-412a-a476-1b74dcfa2ad8.gif',

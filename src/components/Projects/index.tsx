@@ -155,28 +155,28 @@ export const Projects = ({ isDesktop, windowSize }: Props) => {
                   <h1>{projects[project].title}</h1>
                 </div>
                 <div ref={scrollRef} className='body'>
-                  {project < 2 &&
+                  {project < 3 &&
                     <div className='section first'>imagens de exemplo</div>
                   }
                   {projects[project].images.map((image, index) =>
                     <img key={index} src={image} alt={`Imagem de exemplo de ${projects[project].title}`} />
                   )
                   }
-                  {project < 2 &&
+                  {project < projects.length - 1 &&
                     <div className='section'>resumo sobre a aplicação</div>
                   }
                   <p>{projects[project].description}</p>
-                  {project < 2 &&
+                  {project < projects.length - 1 &&
                     <div className='section'>tecnologias utilizadas</div>
                   }
                   <ul>{projects[project].techs.map((tech, index) =>
                     <li key={index}>{tech}</li>
                   )}
                   </ul>
-                  {project < 2 &&
+                  {project < projects.length - 1 &&
                     <div className='section'>caso queira saber mais detalhes ou testar</div>
                   }
-                  {project < 2 &&
+                  {project < projects.length - 1 &&
                     <div className='buttons'>
                       <a target='_blank' href={projects[project].repo}>
                         <button><BsGithub size={20} />Repositório</button>
