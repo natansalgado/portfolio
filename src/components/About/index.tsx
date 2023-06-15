@@ -17,7 +17,7 @@ interface Props {
 }
 
 const defaultText = `Olá, meu nome é Natan Salgado,
-tenho 20 anos e sou desenvolvedor frontend.
+tenho 21 anos e sou desenvolvedor frontend.
 
 Minha primeira interação com programação aconteceu entre os meus 15 e os 16 anos.
 Aprendi o básico, mas logo deixei para lá...
